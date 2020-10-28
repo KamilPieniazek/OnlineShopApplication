@@ -5,8 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Data
 @AllArgsConstructor
@@ -15,24 +14,23 @@ import javax.persistence.Id;
 public class User {
 
     @Id
-    private  String email;
+    private String email;
 
     @NotNull
-    private  String password;
+    private String password;
 
     @NotNull
-    private  String city;
+    private String city;
 
     @NotNull
-    private  String address;
+    private String address;
 
-    private  Byte avatar;
+    //    private  Byte avatar;
+    @OneToOne
+    @JoinColumn(name = "name")
+    private Role role;
 
-    private  enum Role{}
-
-    private  String preferredCWayOfComunication;
-
-
+    private String preferredCWayOfComunication;
 
 
 }
