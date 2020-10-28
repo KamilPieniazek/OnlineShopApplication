@@ -11,6 +11,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "users")
+@Table(name = "users")
 public class User {
 
     @Id
@@ -27,7 +28,7 @@ public class User {
 
     //    private  Byte avatar;
     @OneToOne
-    @JoinColumn(name = "name")
+    @JoinColumn(name = "RoleName")
     private Role role;
 
     private String preferredCWayOfComunication;
