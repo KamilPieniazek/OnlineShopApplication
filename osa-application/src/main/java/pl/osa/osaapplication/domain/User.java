@@ -28,7 +28,6 @@ public class User {
 
     private  Byte avatar;
 
-    private  enum Role{}
 
     private  String preferredCWayOfComunication;
 
