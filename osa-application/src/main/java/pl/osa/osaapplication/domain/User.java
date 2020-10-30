@@ -26,6 +26,7 @@ public class User {
     @NotNull
     private String address;
 
+
     //    private  Byte avatar;
     @OneToOne
     @JoinColumn(name = "RoleName")
