@@ -5,33 +5,34 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "users")
+@Table(name = "users")
 public class User {
 
     @Id
-    private  String email;
+    private String email;
 
     @NotNull
-    private  String password;
+    private String password;
 
     @NotNull
-    private  String city;
+    private String city;
 
     @NotNull
-    private  String address;
-
-    private  Byte avatar;
+    private String address;
 
 
-    private  String preferredCWayOfComunication;
+    //    private  Byte avatar;
+    @OneToOne
+    @JoinColumn(name = "RoleName")
+    private Role role;
 
-
+    private String preferredCWayOfComunication;
 
 
 }
