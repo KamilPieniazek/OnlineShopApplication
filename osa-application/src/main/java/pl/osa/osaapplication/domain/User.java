@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,24 +14,30 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "users")
-@Table(name = "users")
 public class User {
 
     @Id
+    @Email
+    @Basic(optional = false)
+    @Column(name = "email",unique=true, nullable = false)
     private String email;
 
     @NotNull
+    @Column(name = "password")
     private String password;
 
     @NotNull
+    @Column(name = "city")
     private String city;
 
     @NotNull
+    @Column(name = "address")
     private String address;
 
 
     //    private  Byte avatar;
-    private String preferredCWayOfComunication;
+    @Column(name = "preferredWayOdComunication")
+    private String preferredWayOfComunication;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "users_to_roles",

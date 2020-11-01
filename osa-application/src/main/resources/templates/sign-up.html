@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign in</title>
+</head>
+<body>
+<div>
+    <form  method="POST"  th:object="${userForm}">
+        <label for="email">Email: </label>
+        <input id="email" type="text" th:field="*{email}">
+
+        <label for="password">Password: </label>
+        <input id="password" type="text" th:field="*{password}">
+
+        <label for="city">Email: </label>
+        <input id="city" type="text" th:field="*{city}">
+
+        <label for="address">Email: </label>
+        <input id="address" type="text" th:field="*{address}">
+
+        <label for="preferredCWayOfComunication">Email: </label>
+        <input id="preferredCWayOfComunication" type="text" th:field="*{preferredCWayOfComunication}">
+
+        <button type="submit">Sign up</button>
+    </form>
+</div>
+</body>
+</html>

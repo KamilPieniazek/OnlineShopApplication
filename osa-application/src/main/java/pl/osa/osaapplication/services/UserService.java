@@ -20,7 +20,7 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public void createUser(UserForm userForm) {
+    public void createUser(final UserForm userForm) {
         final User user = userMapper.toUser(userForm);
         userRepository.save(user);
 

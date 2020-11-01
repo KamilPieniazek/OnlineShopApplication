@@ -23,5 +23,5 @@ public class UserForm{
 
     private String address;
 
-    private  String preferredCWayOfComunication;
+    private  String preferredWayOfComunication;
 }
