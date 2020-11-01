@@ -6,9 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -17,11 +16,13 @@ import javax.persistence.ManyToOne;
 public class Role {
 
     @Id
-    private String email;
-
-    @NotNull
     private String name;
 
+    @NotNull
+    private String description;
+
+    @ManyToMany(mappedBy = "roles")
+    private List<User> users;
 
 
 }

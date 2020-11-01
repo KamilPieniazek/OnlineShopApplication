@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -28,11 +30,13 @@ public class User {
 
 
     //    private  Byte avatar;
-    @OneToOne
-    @JoinColumn(name = "RoleName")
-    private Role role;
-
     private String preferredCWayOfComunication;
 
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "users_to_roles",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "email"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "name")
+    )
+    private List<Role> roles = new ArrayList<>();
 
 }
