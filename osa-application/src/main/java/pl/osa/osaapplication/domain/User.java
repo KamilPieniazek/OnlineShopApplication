@@ -17,9 +17,12 @@ import java.util.List;
 public class User {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "id")
+    Long id;
+
     @Email
-    @Basic(optional = false)
-    @Column(name = "email",unique=true, nullable = false)
+    @Column(name = "email")
     private String email;
 
     @NotNull
@@ -34,14 +37,14 @@ public class User {
     @Column(name = "address")
     private String address;
 
-
     //    private  Byte avatar;
+
     @Column(name = "preferredWayOdComunication")
     private String preferredWayOfComunication;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "users_to_roles",
-            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "email"),
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "name")
     )
     private List<Role> roles = new ArrayList<>();
