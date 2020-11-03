@@ -19,7 +19,7 @@ public class UserMapper {
         //   user.setPassword(passwordEncoder.encode(userForm.getPassword()));
         user.setCity(userForm.getCity());
         user.setAddress(userForm.getAddress());
-        user.setPreferredCWayOfComunication(userForm.getPreferredCWayOfComunication());
+        user.setPreferredWayOfComunication(userForm.getPreferredWayOfComunication());
         return user;
     }
 }

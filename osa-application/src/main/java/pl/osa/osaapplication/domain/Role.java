@@ -16,9 +16,11 @@ import java.util.List;
 public class Role {
 
     @Id
+    @Column(name = "name")
     private String name;
 
     @NotNull
+    @Column(name = "description")
     private String description;
 
     @ManyToMany(mappedBy = "roles")
