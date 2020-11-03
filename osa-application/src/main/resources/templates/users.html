@@ -11,9 +11,10 @@
 
     </script>
     <style>
-        .popup{
+        .popup {
             visibility: hidden;
         }
+
         .popup.active {
             visibility: visible;
             opacity: 1;
@@ -23,26 +24,48 @@
 </head>
 <body>
 <h1>Users</h1>
+<form action="http://localhost:8080/sign-up">
+    <input type="submit" value="Go to Google" />
+</form>
 <button onClick=popup()>Sign up</button>
 <div class="popup">
-    <form th:action="@{/users/sign-up}"  method="POST"  th:object="${userForm}">
-        <label for="email">Email: </label>
-        <input id="email" type="text" th:field="*{email}">
+    <form th:action="@{/users/sign-up}" method="POST" th:object="${userForm}">
 
-        <label for="password">Password: </label>
-        <input id="password" type="text" th:field="*{password}">
+        <fieldset>
+            <label for="email">Email: </label>
+            <input id="email" type="text" th:field="*{email}">
+             <p th:if="${#fields.hasErrors('email')}"
+                th:text="${#fields.errors('email')}"></p>
 
-        <label for="city">City: </label>
-        <input id="city" type="text" th:field="*{city}">
+            <label for="password">Password: </label>
+            <input id="password" type="text" th:field="*{password}" >
+            <p th:if="${#fields.hasErrors('password')}"
+               th:text="${#fields.errors('password')}"></p>
 
-        <label for="address">Address: </label>
-        <input id="address" type="text" th:field="*{address}">
+            <label for="city">City: </label>
+            <input id="city" type="text" th:field="*{city}">
+            <p th:if="${#fields.hasErrors('city')}"
+               th:text="${#fields.errors('city')}"></p>
 
-        <label for="preferredCWayOfComunication">Way of com: </label>
-        <input id="preferredCWayOfComunication" type="text" th:field="*{preferredWayOfComunication}">
+            <label for="address">Address: </label>
+            <input id="address" type="text" th:field="*{address}">
+            <p th:if="${#fields.hasErrors('address')}"
+               th:text="${#fields.errors('address')}"></p>
 
-        <button type="submit">Sign up</button>
+            <label for="preferredCWayOfComunication">How can we contact you? :</label>
+            <select id="preferredCWayOfComunication" name="email" th:type="text"
+                    th:field="*{preferredWayOfComunication}">
+                <option value=""></option>
+                <option value="mail">e-mail</option>
+                <option value="phone">phone</option>
+            </select>
+            <p th:if="${#fields.hasErrors('preferredWayOfComunication')}"
+               th:text="${#fields.errors('preferredWayOfComunication')}"></p>
+
+            <button type="submit">Sign up</button>
+        </fieldset>
     </form>
+
 </div>
 
 </body>

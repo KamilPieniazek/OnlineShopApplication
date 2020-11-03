@@ -8,7 +8,7 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-//import pl.osa.osaapplication.config.UserProperties;
+import pl.osa.osaapplication.config.UserProperties;
 import pl.osa.osaapplication.domain.Role;
 import pl.osa.osaapplication.domain.User;
 import pl.osa.osaapplication.repositories.UserRepository;
@@ -18,11 +18,11 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 @Transactional
-public class DbInitializer implements CommandLineRunner {
-    @Value("${sda.user.email:default@email.com}")
+public class DbInitializer implements CommandLineRunner  {
+    @Value("test@test.com")
     private String email;
     private final UserRepository userRepository;
-//    private final UserProperties userProperties;
+    private final UserProperties userProperties;
 
     @Override
     public void run(String... args) throws Exception {
@@ -32,7 +32,6 @@ public class DbInitializer implements CommandLineRunner {
 
 //    @EventListener(ContextRefreshedEvent.class)
 //    public void onEvent(){
-//
 //
 //        userRepository.save(new User(null,userProperties.getEmail(),
 //               userProperties.getPassword(),userProperties.getCity(),userProperties.getAddress(),userProperties.getPreferredWayOfComunication()

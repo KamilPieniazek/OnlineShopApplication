@@ -1,12 +1,13 @@
 package pl.osa.osaapplication.domain;
 
-import com.sun.istack.NotNull;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,9 +24,10 @@ public class User {
 
     @Email
     @Column(name = "email")
+    @NotNull(message = "This field is mandatory")
     private String email;
 
-    @NotNull
+    @NotNull(message = "This field is mandatory")
     @Column(name = "password")
     private String password;
 

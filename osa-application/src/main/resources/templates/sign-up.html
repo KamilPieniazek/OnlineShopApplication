@@ -1,29 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Sign in</title>
+    <title>Title</title>
 </head>
 <body>
-<div>
-    <form th:action="@{/users/sign-up}"  method="POST"  th:object="${userForm}">
-        <label for="email">Email: </label>
-        <input id="email" type="text" th:field="*{email}">
-
-        <label for="password">Password: </label>
-        <input id="password" type="text" th:field="*{password}">
-
-        <label for="city">City: </label>
-        <input id="city" type="text" th:field="*{city}">
-
-        <label for="address">Address: </label>
-        <input id="address" type="text" th:field="*{address}">
-
-        <label for="preferredCWayOfComunication">Way of com: </label>
-        <input id="preferredCWayOfComunication" type="text" th:field="*{preferredWayOfComunication}">
-
-        <button type="submit">Sign up</button>
-    </form>
-</div>
+<h1>Dupa</h1>
 </body>
 </html>

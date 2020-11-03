@@ -8,9 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import pl.osa.osaapplication.domain.User;
 import pl.osa.osaapplication.model.UserForm;
 import pl.osa.osaapplication.services.UserService;
-
 import javax.validation.Valid;
-import java.util.List;
+
 
 @RequiredArgsConstructor
 @Controller
