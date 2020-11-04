@@ -21,7 +21,7 @@ public class UserForm {
 
 
 
-    @NotNull(message = "This form  can not be blank!")
+
     @NotEmpty(message = "This form cannot be empty!")
     @Column(unique = true,name = "email")
 
