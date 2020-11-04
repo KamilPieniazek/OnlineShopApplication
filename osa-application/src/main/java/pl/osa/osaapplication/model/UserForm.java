@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import org.hibernate.validator.constraints.Length;
 
+import javax.persistence.Column;
 import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Email;
@@ -18,8 +19,12 @@ import javax.validation.constraints.NotNull;
 @Data
 public class UserForm {
 
+
+
     @NotNull(message = "This form  can not be blank!")
     @NotEmpty(message = "This form cannot be empty!")
+    @Column(unique = true,name = "email")
+
     @Email
     private String email;
 
@@ -39,11 +44,15 @@ public class UserForm {
     @AssertTrue
     public boolean isPasswordValid() {
     if(password==null){
+
         return false;
     }
     return !password.toLowerCase().equals(password) &&
             password.chars().anyMatch(ch->Character.isDigit(ch)) &&
             password.chars().anyMatch(ch->Character.isAlphabetic(ch));
     }
+
+
+
 
 }

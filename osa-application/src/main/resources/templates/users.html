@@ -30,12 +30,14 @@
 <button onClick=popup()>Sign up</button>
 <div class="popup">
     <form th:action="@{/users/sign-up}" method="POST" th:object="${userForm}">
-
+<hi>Sign up</hi>
         <fieldset>
             <label for="email">Email: </label>
             <input id="email" type="text" th:field="*{email}">
              <p th:if="${#fields.hasErrors('email')}"
                 th:text="${#fields.errors('email')}"></p>
+       
+
 
             <label for="password">Password: </label>
             <input id="password" type="text" th:field="*{password}" >
