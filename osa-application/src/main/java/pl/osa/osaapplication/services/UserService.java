@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.osa.osaapplication.domain.User;
+import pl.osa.osaapplication.exceptions.SdaException;
 import pl.osa.osaapplication.model.UserForm;
 import pl.osa.osaapplication.repositories.UserRepository;
 
@@ -18,15 +19,21 @@ public class UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
 
-    public List<User> getAllUsers(){
+    public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
     public void createUser(final UserForm userForm) {
-
+        if (!getByEmail(userForm.getEmail()).isEmpty()) {
+            throw new SdaException("This email is already used!");
+        }
         final User user = userMapper.toUser(userForm);
         userRepository.save(user);
 
+    }
+
+    public List<User> getByEmail(String email) {
+        return userRepository.findAllByEmail(email);
     }
 
 }
