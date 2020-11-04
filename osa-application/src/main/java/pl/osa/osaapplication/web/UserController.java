@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.osa.osaapplication.domain.User;
 import pl.osa.osaapplication.model.UserForm;
 import pl.osa.osaapplication.services.UserService;
+import pl.osa.osaapplication.services.validation.UserValidator;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -21,6 +22,7 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+    private final UserValidator userValidator;
 
     @GetMapping
     public String showUsersView(final ModelMap modelMap) {
@@ -36,9 +38,10 @@ public class UserController {
 
     @RequestMapping(value = "/sign-up", method = {RequestMethod.GET, RequestMethod.POST})
     public String createUser(@Valid @ModelAttribute(name = "userForm") final UserForm userForm,
-                             BindingResult bindingResult, Model model) {
+                             final Errors errors) {
+        userValidator.validateEmail(userForm,errors);
+      if (errors.hasErrors()) {
 
-        if (bindingResult.hasErrors()) {
             return "/users";
         }
         userService.createUser(userForm);
