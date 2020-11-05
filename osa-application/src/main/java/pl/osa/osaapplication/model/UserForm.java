@@ -23,8 +23,7 @@ public class UserForm {
 
 
     @NotEmpty(message = "This form cannot be empty!")
-    @Column(unique = true,name = "email")
-
+  //  @Column(unique = true,name = "email")
     @Email
     private String email;
 

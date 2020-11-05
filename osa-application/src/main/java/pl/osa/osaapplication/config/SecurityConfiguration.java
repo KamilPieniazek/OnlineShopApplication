@@ -8,10 +8,11 @@
 //    @Override
 //    protected void configure(HttpSecurity http) throws Exception {
 //        http.authorizeRequests()
-//                .antMatchers("/").permitAll()
+//                .antMatchers("/**").permitAll()
 //                .antMatchers("/h2/**").permitAll();
 //
-//        http.csrf().disable();
+//        http.csrf()
+//                .ignoringAntMatchers("h2/**").disable();
 //        http.headers().frameOptions().disable();
 //    }
 //}
