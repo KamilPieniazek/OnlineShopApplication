@@ -24,12 +24,8 @@ public class UserService {
     }
 
     public void createUser(final UserForm userForm) {
-//        if (!getByEmail(userForm.getEmail()).isEmpty()) {
-//            throw new SdaException("This email is already used!");
-//        }
         final User user = userMapper.toUser(userForm);
         userRepository.save(user);
-
     }
 
     public List<User> getByEmail(String email) {
