@@ -16,7 +16,7 @@ import java.util.List;
 public class Role {
 
     @Id
-    @Column(name = "name")
+    @Column(name = "name", columnDefinition = "varchar(255) default 'USER'")
     private String name;
 
     @NotNull

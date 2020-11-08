@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import org.hibernate.validator.constraints.Length;
+import pl.osa.osaapplication.domain.Role;
 
 import javax.persistence.Column;
 import javax.validation.Valid;
@@ -20,10 +21,8 @@ import javax.validation.constraints.NotNull;
 public class UserForm {
 
 
-
-
     @NotEmpty(message = "This form cannot be empty!")
-  //  @Column(unique = true,name = "email")
+    //  @Column(unique = true,name = "email")
     @Email
     private String email;
 
@@ -34,24 +33,25 @@ public class UserForm {
     @NotEmpty(message = "This form can not be blank!")
     private String city;
 
-    @NotEmpty( message = "This form can not be blank!")
+    @NotEmpty(message = "This form can not be blank!")
     private String address;
 
     @NotEmpty(message = "Please pick an option")
     private String preferredWayOfComunication;
 
+    @Column(name = "name", columnDefinition = "varchar(255) default 'USER'")
+    private Role role;
+
     @AssertTrue
     public boolean isPasswordValid() {
-    if(password==null){
+        if (password == null) {
 
-        return false;
+            return false;
+        }
+        return !password.toLowerCase().equals(password) &&
+                password.chars().anyMatch(ch -> Character.isDigit(ch)) &&
+                password.chars().anyMatch(ch -> Character.isAlphabetic(ch));
     }
-    return !password.toLowerCase().equals(password) &&
-            password.chars().anyMatch(ch->Character.isDigit(ch)) &&
-            password.chars().anyMatch(ch->Character.isAlphabetic(ch));
-    }
-
-
 
 
 }

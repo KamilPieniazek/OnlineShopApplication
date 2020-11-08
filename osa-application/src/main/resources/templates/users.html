@@ -43,6 +43,9 @@
             <td>
                 <input type = "submit" value = "Get HTML Page"/>
             </td>
+        </tr>
+    </table>
+</form>
 <h1>Users</h1>
 <button><a th:href="@{/products}">Dupa</a> </button>
 
@@ -73,11 +76,11 @@
                th:text="${#fields.errors('address')}"></p>
 
             <label for="preferredCWayOfComunication">How can we contact you? :</label>
-            <select id="preferredCWayOfComunication" name="email" th:type="text"
+            <select id="preferredCWayOfComunication"  th:type="text"
                     th:field="*{preferredWayOfComunication}">
-                <option value=""></option>
-                <option value="mail">e-mail</option>
-                <option value="phone">phone</option>
+                <option value="">Pick</option>
+                <option value="e-mail">E-mail</option>
+                <option value="phone">Phone</option>
             </select>
             <p th:if="${#fields.hasErrors('preferredWayOfComunication')}"
                th:text="${#fields.errors('preferredWayOfComunication')}"></p>

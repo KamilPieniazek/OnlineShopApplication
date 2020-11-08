@@ -27,7 +27,7 @@ public class Product {
 
     //kategoria
 
-  //  @NotEmpty
+    //  @NotEmpty
     @Column(name = "price")
     private double price;
 
@@ -35,8 +35,9 @@ public class Product {
     @Column(name = "type")
     private ProductType type;
 
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name = "id")
+    @ManyToOne
+    @JoinColumn(name = "author",referencedColumnName = "name")
+
     private Author author;
 
 

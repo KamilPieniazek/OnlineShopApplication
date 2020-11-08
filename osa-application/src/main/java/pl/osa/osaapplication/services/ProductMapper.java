@@ -16,7 +16,7 @@ public class ProductMapper {
         final Product product = new Product();
         product.setTitle(productForm.getTitle());
         product.setDescription(productForm.getDescription());
-       // product.setAuthor(productForm);
+        product.setAuthor(productForm.getAuthor());
         product.setType(productForm.getProductType());
         product.setPrice(productForm.getPrice());
         return product;
