@@ -36,7 +36,7 @@ public class ProductForm {
     private ProductType productType;
 
 
-    private List<String> authorName;
+    private String authorName;
 
 
 }

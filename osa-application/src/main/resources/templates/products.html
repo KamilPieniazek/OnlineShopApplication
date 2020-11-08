@@ -47,7 +47,7 @@
             <input id="image" type="file" th:field="*{image}">
 
             <label for="author">Pick an author :</label>
-            <select id="author" name="author" th:type="text">
+            <select id="author" name="author" th:type="text" th:field="*{authorName}">
                 <option value="">Select author</option>
                 <option th:each="author : ${authors}"
                 th:text="${author.name}"
