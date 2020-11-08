@@ -21,7 +21,7 @@
     </style>
 </head>
 <body>
-<a href="index.html">Dupa</a>
+
 <button onClick=addProduct()>Add product</button>
 <div class="addProduct">
     <form th:action="@{/products/addProduct}" method="POST" th:object="${productForm}">
@@ -43,14 +43,20 @@
             <p th:if="${#fields.hasErrors('price')}"
                th:text="${#fields.errors('price')}"></p>
 
+            <label for="image">Image: </label>
+            <input id="image" type="file" th:field="*{image}">
+
             <label for="author">Pick an author :</label>
             <select id="author" name="author" th:type="text">
                 <option value="">Select author</option>
-                <option th:each="author:${productForm.getAuthor()}"
-                th:value="${author}"
-                th:text="${author}"></option>
+                <option th:each="author : ${authors}"
+                th:text="${author.name}"
+                th:value="${author.name}"></option>
+<!--                <option th:each="author:${productForm.getAuthor()}"-->
+<!--                th:value="${author}"-->
+<!--                th:text="${author}"></option>-->
             </select>
-<!--jak zrobic zeby wyswietlaly sie informacje z innej bazy?-->
+<!--jak zrobic zeby wyswietlaly sie informacje z innej tabeli?-->
 
             <label for="type">Pick type :</label>
             <select id="type" name="productType" >
@@ -64,5 +70,10 @@
     </form>
 </div>
 
+<h1>Products</h1>
+<div th:each="product : ${products}">
+    <p th:text="'Title: ' + ${product.getTitle()}"></p>
+    <p th:text="'Status: ' + ${product.getDescription()}"></p>
+</div>
 </body>
 </html>

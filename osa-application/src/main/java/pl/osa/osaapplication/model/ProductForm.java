@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,24 +25,18 @@ public class ProductForm {
     private String description;
 
     //url
+    //@NotEmpty(message = "Please load a picture of a product")
+    private byte[] image;
 
-    //kategoria
 
-
-   // @NotEmpty(message = "Please add price")
+    // @NotEmpty(message = "Please add price")
     private double price;
 
     @Enumerated(EnumType.STRING)
     private ProductType productType;
 
 
-
-    @ManyToOne
-    @JoinColumn(name = "author",referencedColumnName = "name")
-    private Author author;
-
-
-
+    private List<String> authorName;
 
 
 }

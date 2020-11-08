@@ -1,6 +1,6 @@
 package pl.osa.osaapplication.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,7 +22,8 @@ public class Author {
     private String name;
 
 
-    @OneToMany(mappedBy = "author")
+    @OneToMany()
+    @JoinColumn(name = "author_name")
     private List<Product> products;
 
 

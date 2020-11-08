@@ -11,7 +11,10 @@ import javax.persistence.Id;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "categories")
-public class Cathegory {
+public class Category {
     @Id
     private String name;
+
+    //jesli parentName == null to kategoria jest nadrzedna, jesli nie to kategoria jest dzieckiem
+    private String parentName;
 }

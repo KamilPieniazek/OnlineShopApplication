@@ -23,7 +23,9 @@ public class Product {
     @Column(name = "description")
     private String description;
 
-    //private url miniaturka
+
+    @Column(name = "image")
+    private byte[] image;
 
     //kategoria
 
@@ -35,10 +37,7 @@ public class Product {
     @Column(name = "type")
     private ProductType type;
 
-    @ManyToOne
-    @JoinColumn(name = "author",referencedColumnName = "name")
-
+    @ManyToOne()
     private Author author;
-
 
 }

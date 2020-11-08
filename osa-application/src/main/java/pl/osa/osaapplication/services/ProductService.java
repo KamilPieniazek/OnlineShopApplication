@@ -27,4 +27,10 @@ public class ProductService {
         final Product product = productMapper.toProduct(productForm);
         productRepository.save(product);
     }
+
+    public Product getProductByName(String title) {
+        return productRepository.findById(title)
+                .orElseThrow();
+    }
+
 }
