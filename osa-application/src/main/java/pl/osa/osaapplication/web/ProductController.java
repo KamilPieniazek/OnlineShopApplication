@@ -2,6 +2,7 @@ package pl.osa.osaapplication.web;
 
 import lombok.RequiredArgsConstructor;
 //import org.springframework.security.access.annotation.Secured;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.Errors;
@@ -26,16 +27,17 @@ public class ProductController {
     private final AuthorRepository authorRepository;
 
     @GetMapping
-    public String showUsersView(final ModelMap modelMap) {
+    public String showProductsView(final ModelMap modelMap) {
         modelMap.addAttribute("products", productService.getAllProducts());
         modelMap.addAttribute("productForm", new ProductForm());
-        modelMap.addAttribute("authors",authorRepository.findAll());
+        modelMap.addAttribute("authors", authorRepository.findAll());
+
 
         return "products";
     }
 
     @GetMapping("/products")
-    public List<Product> getAllProducts(){
+    public List<Product> getAllProducts() {
         return productService.getAllProducts();
     }
 
@@ -44,16 +46,35 @@ public class ProductController {
                              final Errors errors) {
 
         if (errors.hasErrors()) {
-            return "/products";
+            return "products";
         }
         productService.addProduct(productForm);
         return "redirect:/products";
     }
 
 
+    @GetMapping(value = "/details/{title}")
+    public String getProduct(@PathVariable final String title, ModelMap model) {
+        Product product = productService.getProductById(title);
+        model.addAttribute("product_details", product);
+        return "product_details";
+    }
 
-    @RequestMapping(value = "/{title}")
-    public Product getProduct(@PathVariable(name = "title") final String title) {
-        return productService.getProductByName(title);
+
+    @RequestMapping(value = "/details/{title}/update",method = {RequestMethod.GET,RequestMethod.POST}, consumes = {"application/x-www-form-urlencoded"})
+
+    public  String updateProduct(@PathVariable final String title, @RequestBody final ProductForm productForm, final Errors errors){
+        if (errors.hasErrors()) {
+            return "product_details";
+        }
+
+        productService.updateProduct(productForm,title);
+        return "redirect:product_details";
+    }
+
+    @DeleteMapping("/details/{title}/remove")
+    public String deleteProduct(@PathVariable final String title){
+        productService.removeProduct(title);
+        return "products";
     }
 }

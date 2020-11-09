@@ -41,7 +41,7 @@ public class DbInitializer implements CommandLineRunner  {
         Author kamil_pieniążek = authorRepository.save(new Author("Kamil Pieniążek", List.of()));
 
 
-        productRepository.save(new Product("Ksiazka","Opis", new byte[]{}, 34.0, ProductType.BOOK,kamil_pieniążek));
+        productRepository.save(new Product("Ksiazka","Opis", new byte[]{},"book", 34.0, ProductType.BOOK,kamil_pieniążek));
     }
 
 //    @EventListener(ContextRefreshedEvent.class)

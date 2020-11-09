@@ -2,11 +2,8 @@ package pl.osa.osaapplication.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestMapping;
 import pl.osa.osaapplication.domain.Product;
-import pl.osa.osaapplication.domain.User;
 import pl.osa.osaapplication.model.ProductForm;
-import pl.osa.osaapplication.model.UserForm;
 import pl.osa.osaapplication.repositories.AuthorRepository;
 
 @RequiredArgsConstructor
@@ -22,6 +19,7 @@ public class ProductMapper {
         product.setImage(productForm.getImage());
         product.setType(productForm.getProductType());
         product.setPrice(productForm.getPrice());
+        product.setCategory(productForm.getCategoryName());
         return product;
     }
 }

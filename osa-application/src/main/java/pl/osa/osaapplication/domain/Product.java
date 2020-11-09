@@ -28,6 +28,8 @@ public class Product {
     private byte[] image;
 
     //kategoria
+    @Column(name = "category")
+    private String category;
 
     //  @NotEmpty
     @Column(name = "price")
@@ -39,5 +41,7 @@ public class Product {
 
     @ManyToOne()
     private Author author;
+
+
 
 }

@@ -3,15 +3,11 @@ package pl.osa.osaapplication.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pl.osa.osaapplication.domain.Author;
-
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import java.util.List;
+
+
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -35,8 +31,9 @@ public class ProductForm {
     @Enumerated(EnumType.STRING)
     private ProductType productType;
 
-
     private String authorName;
+
+    private String categoryName;
 
 
 }
