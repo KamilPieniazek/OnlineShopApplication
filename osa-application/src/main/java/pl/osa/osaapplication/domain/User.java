@@ -17,11 +17,12 @@ import java.util.List;
 @Entity(name = "users")
 public class User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id")
-    Long id;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+//    @Column(name = "id")
+//    Long id;
 
+    @Id
     @Email
     @Column(name = "email")
     @NotNull(message = "This field is mandatory")
@@ -44,11 +45,18 @@ public class User {
     @Column(name = "preferredWayOdComunication")
     private String preferredWayOfComunication;
 
+
+
+    @Column(columnDefinition = "varchar(255) default 'USER'")
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "users_to_roles",
-            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "email"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "name")
     )
     private List<Role> roles = new ArrayList<>();
+
+    //    @JoinColumn(name = "user_id",referencedColumnName = "id")
+//    @JoinColumn(name = "role_id",referencedColumnName = "name")
+//    private String role;
 
 }

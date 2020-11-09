@@ -23,11 +23,15 @@ public class Product {
     @Column(name = "description")
     private String description;
 
-    //private url miniaturka
+
+    @Column(name = "image")
+    private byte[] image;
 
     //kategoria
+    @Column(name = "category")
+    private String category;
 
-  //  @NotEmpty
+    //  @NotEmpty
     @Column(name = "price")
     private double price;
 
@@ -35,9 +39,9 @@ public class Product {
     @Column(name = "type")
     private ProductType type;
 
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name = "id")
+    @ManyToOne()
     private Author author;
+
 
 
 }

@@ -5,7 +5,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.osa.osaapplication.domain.User;
-import pl.osa.osaapplication.exceptions.SdaException;
 import pl.osa.osaapplication.model.UserForm;
 import pl.osa.osaapplication.repositories.UserRepository;
 

@@ -8,11 +8,6 @@
             var popup = document.querySelector('.registerForm');
             popup.classList.toggle('active')
         }
-        function addProduct() {
-            var popupProduct = document.querySelector('.addProduct');
-            popupProduct.classList.toggle('activ')
-        }
-
     </script>
     <style>
         .registerForm {
@@ -25,31 +20,17 @@
             transition: 0.5s;
         }
 
-        .addProduct {
-            visibility: hidden;
-        }
-
-        .addProduct.activ {
-            visibility: visible;
-            opacity: 1;
-            transition: 0.5s;
-        }
     </style>
 </head>
 <body>
-<form th:method = "GET" action = "@{/index}">
-    <table>
-        <tr>
-            <td>
-                <input type = "submit" value = "Get HTML Page"/>
-            </td>
+
 <h1>Users</h1>
 <button><a th:href="@{/products}">Dupa</a> </button>
 
 <button onClick=registerForm()>Sign up</button>
 <div class="registerForm">
     <form th:action="@{/users/sign-up}" method="POST" th:object="${userForm}">
-<hi>Sign up</hi>
+<h1>Sign up</h1>
         <fieldset>
             <label for="email">Email: </label>
             <input id="email" type="text" th:field="*{email}">
@@ -73,11 +54,11 @@
                th:text="${#fields.errors('address')}"></p>
 
             <label for="preferredCWayOfComunication">How can we contact you? :</label>
-            <select id="preferredCWayOfComunication" name="email" th:type="text"
+            <select id="preferredCWayOfComunication"  th:type="text"
                     th:field="*{preferredWayOfComunication}">
-                <option value=""></option>
-                <option value="mail">e-mail</option>
-                <option value="phone">phone</option>
+                <option value="">Pick</option>
+                <option value="e-mail">E-mail</option>
+                <option value="phone">Phone</option>
             </select>
             <p th:if="${#fields.hasErrors('preferredWayOfComunication')}"
                th:text="${#fields.errors('preferredWayOfComunication')}"></p>
@@ -86,36 +67,6 @@
         </fieldset>
     </form>
 </div>
-<!--<button onClick=addProduct()>Add product</button>-->
-<!--<div class="addProduct">-->
-<!--    <form th:action="@{/users/addProduct}" method="POST" th:object="${productForm}">-->
-<!--        <hi>Sign up</hi>-->
-<!--        <fieldset>-->
-<!--            <label for="title">Title: </label>-->
-<!--            <input id="title" type="text" th:field="*{title}">-->
-<!--&lt;!&ndash;            <p th:if="${#fields.hasErrors('title')}"&ndash;&gt;-->
-<!--&lt;!&ndash;               th:text="${#fields.errors('title')}"></p>&ndash;&gt;-->
-
-
-<!--            <label for="description">Password: </label>-->
-<!--            <input id="description" type="text" th:field="*{description}" >-->
-<!--&lt;!&ndash;            <p th:if="${#fields.hasErrors('description')}"&ndash;&gt;-->
-<!--&lt;!&ndash;               th:text="${#fields.errors('description')}"></p>&ndash;&gt;-->
-
-<!--&lt;!&ndash;            <label for="type">City: </label>&ndash;&gt;-->
-<!--&lt;!&ndash;            <input id="type" type="text" th:field="*{type}">&ndash;&gt;-->
-<!--&lt;!&ndash;            <p th:if="${#fields.hasErrors('type')}"&ndash;&gt;-->
-<!--&lt;!&ndash;               th:text="${#fields.errors('type')}"></p>&ndash;&gt;-->
-
-<!--            <label for="price">Address: </label>-->
-<!--            <input id="price" type="number" th:field="*{price}">-->
-<!--&lt;!&ndash;            <p th:if="${#fields.hasErrors('price')}"&ndash;&gt;-->
-<!--&lt;!&ndash;               th:text="${#fields.errors('price')}"></p>&ndash;&gt;-->
-
-<!--            <button type="submit">Add product</button>-->
-<!--        </fieldset>-->
-<!--    </form>-->
-<!--</div>-->
 
 </body>
 </html>

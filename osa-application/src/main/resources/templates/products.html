@@ -21,7 +21,7 @@
     </style>
 </head>
 <body>
-<a href="index.html">Dupa</a>
+<a th:href="@{/users}">users</a>
 <button onClick=addProduct()>Add product</button>
 <div class="addProduct">
     <form th:action="@{/products/addProduct}" method="POST" th:object="${productForm}">
@@ -38,20 +38,40 @@
             <p th:if="${#fields.hasErrors('description')}"
                th:text="${#fields.errors('description')}"></p>
 
-            <!--            <label for="type">City: </label>-->
-            <!--            <input id="type" type="text" th:field="*{type}">-->
-            <!--            <p th:if="${#fields.hasErrors('type')}"-->
-            <!--               th:text="${#fields.errors('type')}"></p>-->
-
-            <label for="price">Address: </label>
+            <label for="price">Price: </label>
             <input id="price" type="text" th:field="*{price}">
             <p th:if="${#fields.hasErrors('price')}"
                th:text="${#fields.errors('price')}"></p>
 
+            <label for="image">Image: </label>
+            <input id="image" type="file" th:field="*{image}">
+
+            <label for="author">Pick an author :</label>
+            <select id="author" name="author" th:type="text" th:field="*{authorName}">
+                <option value="">Select author</option>
+                <option th:each="author : ${authors}"
+                th:text="${author.name}"
+                th:value="${author.name}"></option>
+            </select>
+
+
+            <label for="type">Pick type :</label>
+            <select id="type" name="productType" >
+                <option value="">Select type</option>
+                <option th:each="type:${T(pl.osa.osaapplication.model.ProductType).values()}"
+                        th:value="${type.name()}"
+                        th:text="${type.name()}"></option>
+            </select>
             <button type="submit">Add product</button>
         </fieldset>
     </form>
 </div>
 
+<h1>Products</h1>
+<div th:each="product : ${products}">
+    <p th:text="'Title: ' + ${product.getTitle()}"></p>
+    <p th:text="'Description: ' + ${product.getDescription()}"></p>
+    <a th:href="@{/products/details/{title} (title=${product.title})}">More details</a>
+</div>
 </body>
 </html>

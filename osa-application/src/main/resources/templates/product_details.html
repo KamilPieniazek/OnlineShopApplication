@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<div  th:object="${product_details}">
+    <p th:text="'Title: ' + ${product_details.getTitle()}"></p>
+<!--    <p th:text="'Author: ' + ${product_details.getAuthor()}"></p>-->
+    <p th:text="'Price: ' + ${product_details.getPrice()}"></p>
+    <p th:text="'Description: ' + ${product_details.getDescription()}"></p>
+    <a th:href="@{/products}">Back</a>
+</div>
+
+<div class="update">
+    <form th:action="@{/products/details/{title}/update (title=${product_details.title})}" method="post" th:object="${product_details}">
+        <h1>Sign up</h1>
+        <fieldset>
+            <label>Title: </label>
+            <p th:text="*{title}"></p>
+
+
+
+            <label for="description">Description: </label>
+            <input id="description" type="text" th:field="*{description}" >
+            <p th:if="${#fields.hasErrors('description')}"
+               th:text="${#fields.errors('description')}"></p>
+
+            <label for="price">Price: </label>
+            <input id="price" type="text" th:field="*{price}">
+            <p th:if="${#fields.hasErrors('price')}"
+               th:text="${#fields.errors('price')}"></p>
+
+            <label for="image">Image: </label>
+            <input id="image" type="file" th:field="*{image}">
+
+<!--            <label for="author">Pick an author :</label>-->
+<!--            <select id="author" name="author" th:type="text" th:field="*{authorName}">-->
+<!--                <option value="">Select author</option>-->
+<!--                <option th:each="author : ${authors}"-->
+<!--                        th:text="${author.name}"-->
+<!--                        th:value="${author.name}"></option>-->
+<!--            </select>-->
+
+
+            <label for="type">Pick type :</label>
+            <select id="type" name="productType" >
+                <option value="">Select type</option>
+                <option th:each="type:${T(pl.osa.osaapplication.model.ProductType).values()}"
+                        th:value="${type.name()}"
+                        th:text="${type.name()}"></option>
+            </select>
+            <button type="submit">Update product</button>
+        </fieldset>
+    </form>
+</div>
+<a th:href="@{/products/details/{title}/remove (title=${product_details.title})}">Delete product</a> //zle
+</body>
+</html>
