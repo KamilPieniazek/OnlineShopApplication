@@ -13,6 +13,8 @@ import pl.osa.osaapplication.domain.User;
 import pl.osa.osaapplication.model.ProductForm;
 import pl.osa.osaapplication.model.UserForm;
 import pl.osa.osaapplication.repositories.AuthorRepository;
+import pl.osa.osaapplication.repositories.OrderLineRepository;
+import pl.osa.osaapplication.services.OrderLineService;
 import pl.osa.osaapplication.services.ProductService;
 
 import javax.validation.Valid;
@@ -25,6 +27,8 @@ public class ProductController {
     private final ProductService productService;
 
     private final AuthorRepository authorRepository;
+
+    private final OrderLineService orderLineService;
 
     @GetMapping
     public String showProductsView(final ModelMap modelMap) {
@@ -59,6 +63,11 @@ public class ProductController {
         model.addAttribute("product_details", product);
         return "product_details";
     }
+    @GetMapping(value = "/details/{title}/addToChart")
+    public String createOrderLine(final ProductForm productForm){
+        orderLineService.createOrderLine(productForm);
+        return "redirect:/products";
+    }
 
 
     @RequestMapping(value = "/details/{title}/update",method = {RequestMethod.GET,RequestMethod.POST}, consumes = {"application/x-www-form-urlencoded"})
@@ -69,12 +78,13 @@ public class ProductController {
         }
 
         productService.updateProduct(productForm,title);
-        return "redirect:product_details";
+        return "product_details";
     }
 
-    @DeleteMapping("/details/{title}/remove")
+
+    @RequestMapping(value ="/details/{title}/remove",method = {RequestMethod.GET,RequestMethod.DELETE})
     public String deleteProduct(@PathVariable final String title){
         productService.removeProduct(title);
-        return "products";
+        return "redirect:/products";
     }
 }
