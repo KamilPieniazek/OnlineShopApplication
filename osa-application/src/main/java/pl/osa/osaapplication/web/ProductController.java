@@ -57,22 +57,23 @@ public class ProductController {
     }
 
 
-    @GetMapping(value = "/details/{title}")
+//    @GetMapping(value = "/details/{title}")
+    @RequestMapping(value = "/details/{title}",method = {RequestMethod.GET,RequestMethod.POST})
     public String getProduct(@PathVariable final String title, ModelMap model) {
         Product product = productService.getProductById(title);
         model.addAttribute("product_details", product);
         return "product_details";
     }
-    @GetMapping(value = "/details/{title}/addToChart")
+    @RequestMapping(value = "/details/{title}/addToChart",method = {RequestMethod.GET,RequestMethod.POST})
     public String createOrderLine(final ProductForm productForm){
         orderLineService.createOrderLine(productForm);
-        return "redirect:/products";
+        return "redirect:/products/details/{title}";
     }
 
 
     @RequestMapping(value = "/details/{title}/update",method = {RequestMethod.GET,RequestMethod.POST}, consumes = {"application/x-www-form-urlencoded"})
 
-    public  String updateProduct(@PathVariable final String title, @RequestBody final ProductForm productForm, final Errors errors){
+    public  String updateProduct(@PathVariable final String title, @Valid @ModelAttribute(name = "productForm") final ProductForm productForm, final Errors errors){
         if (errors.hasErrors()) {
             return "product_details";
         }
@@ -87,4 +88,6 @@ public class ProductController {
         productService.removeProduct(title);
         return "redirect:/products";
     }
+
+
 }

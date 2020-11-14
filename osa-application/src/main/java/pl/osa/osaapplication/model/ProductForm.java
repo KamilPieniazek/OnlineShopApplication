@@ -3,10 +3,10 @@ package pl.osa.osaapplication.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.validation.constraints.NotEmpty;
-
 
 
 @NoArgsConstructor
@@ -34,6 +34,8 @@ public class ProductForm {
     private String authorName;
 
     private String categoryName;
+
+    private Long quantity;
 
 
 }

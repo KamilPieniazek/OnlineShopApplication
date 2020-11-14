@@ -42,6 +42,9 @@ public class Product {
     @ManyToOne()
     private Author author;
 
+    @Column(name = "quantity")
+    private Long quantity;
+
 
 
 }

@@ -16,6 +16,7 @@ public class OrderLineMapper {
 
         orderLine.setProduct(productForm.getTitle());
         orderLine.setPrice(productForm.getPrice());
+        orderLine.setQuantity(productForm.getQuantity());
 
         return orderLine;
     }
