@@ -13,6 +13,7 @@
     <p th:text="'Price: ' + ${product_details.getPrice()}"></p>
     <p th:text="'Description: ' + ${product_details.getDescription()}"></p>
     <a th:href="@{/products}">Back</a>
+
 </div>
 
 <div class="update">
@@ -64,13 +65,12 @@
 
         <label for="quantity">Q: </label>
         <input id="quantity" type="number" th:field="*{quantity}" th:value="${product_details.quantity}">
-        <button onclick="increment()">+</button>
-        <button onclick="decrement()">-</button>
-    <a th:href="@{/products/details/{title}/addToChart (title=${product_details.title})}">Add to Chart</a>
+    <input type="submit" th:text="submit">
+
 </form>
-<!--<input id="numberOfProducts" type="number" min="1" max="100">-->
-<!--<button onclick="increment()">+</button>-->
-<!--<button onclick="decrement()">+</button>-->
+
+<button onclick="increment()">+</button>
+<button onclick="decrement()">-</button>
 <script>
     function increment(){
         document.getElementById('quantity').stepUp();
@@ -80,6 +80,6 @@
         document.getElementById('quantity').stepDown();
     }
 </script>
-<a th:href="@{/products/details/{title}/addToChart (title=${product_details.title})}">Add to Chart</a>
+
 </body>
 </html>

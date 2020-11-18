@@ -8,6 +8,7 @@ import pl.osa.osaapplication.model.ProductType;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -44,6 +45,7 @@ public class Product {
 
     @Column(name = "quantity")
     private Long quantity;
+
 
 
 

@@ -22,6 +22,7 @@
 </head>
 <body>
 <a th:href="@{/users}">users</a>
+<a th:href="@{/cart}">chart</a>
 <button onClick=addProduct()>Add product</button>
 <div class="addProduct">
     <form th:action="@{/products/addProduct}" method="POST" th:object="${productForm}">
@@ -68,10 +69,14 @@
 </div>
 
 <h1>Products</h1>
+
 <div th:each="product : ${products}">
     <p th:text="'Title: ' + ${product.getTitle()}"></p>
     <p th:text="'Description: ' + ${product.getDescription()}"></p>
     <a th:href="@{/products/details/{title} (title=${product.title})}">More details</a>
+</div>
+
+
 </div>
 </body>
 </html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cart</title>
+
+    <script> function createOrder() {
+        let popupOrder = document.querySelector('.createOrder');
+        popupOrder.classList.toggle('activ')
+    }</script>
+    <style>
+        .createOrder {
+            visibility: hidden;
+        }
+
+        .createOrder.activ {
+            visibility: visible;
+            opacity: 1;
+            transition: 0.5s;
+        }
+    </style>
+</head>
+<body>
+<h1>Cart</h1>
+<div th:each="order : ${orderLine}">
+
+    <p th:text="'Product name: ' + ${order.getProduct()}"></p>
+    <p th:text="'Price: ' + ${order.getPrice()}"></p>
+    <p th:text="'Quantity: '+${order.getQuantity()}"></p>
+</div>
+
+
+<button onClick=createOrder()>Order</button>
+<div class="createOrder">
+    <form th:action="@{/cart/order}" method="POST" th:object="${OrderForm}">
+        <hi>Order resume</hi>
+        <fieldset>
+            <label>Username: </label>
+            <p th:text="*{username}"></p>
+            <label> Total amount: </label>
+            <p th:text="*{totalPrice}"></p>
+            <label> Adress: </label>
+            <p th:text="*{address}"></p>
+
+            <button type="submit">Submit order</button>
+        </fieldset>
+    </form>
+</div>
+
+</body>
+</html>

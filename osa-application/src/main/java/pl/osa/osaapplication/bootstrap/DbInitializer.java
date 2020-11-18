@@ -9,14 +9,9 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import pl.osa.osaapplication.domain.Author;
-import pl.osa.osaapplication.domain.Product;
-import pl.osa.osaapplication.domain.Role;
-import pl.osa.osaapplication.domain.User;
+import pl.osa.osaapplication.domain.*;
 import pl.osa.osaapplication.model.ProductType;
-import pl.osa.osaapplication.repositories.AuthorRepository;
-import pl.osa.osaapplication.repositories.ProductRepository;
-import pl.osa.osaapplication.repositories.UserRepository;
+import pl.osa.osaapplication.repositories.*;
 
 import java.util.List;
 
@@ -32,6 +27,10 @@ public class DbInitializer implements CommandLineRunner  {
 
     private  final ProductRepository productRepository;
 
+    private final OrderRepository orderRepository;
+
+    private final OrderLineRepository orderLineRepository;
+
     @Override
     public void run(String... args) throws Exception {
         userRepository.save(new User("Kamil@o2.pl","kamil12","Gdansk","Dragana","mail",
@@ -42,13 +41,11 @@ public class DbInitializer implements CommandLineRunner  {
 
 
         productRepository.save(new Product("Ksiazka","Opis", new byte[]{},"book", 34.0, ProductType.BOOK,kamil_pieniążek,1L));
+
+        OrderLine ksiazka = orderLineRepository.save(new OrderLine(null, "Ksiazka", 4L, 34.0, List.of()));
+//        orderRepository.save(new Order(null,"kamilpieniazek96@gmail.com",34.0,"Dupa","Dupa", ksiazka));
     }
 
-//    @EventListener(ContextRefreshedEvent.class)
-//    public void onEvent(){
-//
-//        userRepository.save(new User(null,userProperties.getEmail(),
-//               userProperties.getPassword(),userProperties.getCity(),userProperties.getAddress(),userProperties.getPreferredWayOfComunication()
-//              ,List.of(new Role("ROLE_ADMIN", "admin group", List.of()))));
-//    }
+
+
 }

@@ -23,4 +23,9 @@ public class OrderLine {
 
     private double price;
 
+    @OneToMany
+    @JoinColumn(name = "orders")
+    private List<Order> orders;
+
+
 }
