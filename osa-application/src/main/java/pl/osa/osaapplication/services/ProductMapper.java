@@ -20,6 +20,7 @@ public class ProductMapper {
         product.setType(productForm.getProductType());
         product.setPrice(productForm.getPrice());
         product.setCategory(productForm.getCategoryName());
+        product.setQuantity(productForm.getQuantity());
         return product;
     }
 }
