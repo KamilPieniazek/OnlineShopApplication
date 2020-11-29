@@ -16,9 +16,12 @@
 
 </div>
 
+
+</div>
 <div class="update">
     <form th:action="@{/products/details/{title}/update (title=${product_details.title})}" method="post" th:object="${product_details}">
-        <h1>Update product</h1>
+        <h1>Update product
+
         <fieldset>
             <label>Title: </label>
             <p th:text="*{title}"></p>

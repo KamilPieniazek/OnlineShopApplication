@@ -4,11 +4,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.osa.osaapplication.domain.Order;
-import pl.osa.osaapplication.domain.Product;
-import pl.osa.osaapplication.model.OrderForm;
-import pl.osa.osaapplication.model.ProductForm;
-import pl.osa.osaapplication.model.UserForm;
+import pl.osa.osaapplication.domain.OrderLine;
+import pl.osa.osaapplication.repositories.OrderLineRepository;
 import pl.osa.osaapplication.repositories.OrderRepository;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -16,11 +16,23 @@ import pl.osa.osaapplication.repositories.OrderRepository;
 public class OrderService {
 
     private final OrderRepository orderRepository;
+
+    private final OrderLineRepository orderLineRepository;
+
+    private final OrderLine orderLine;
+
     private final OrderMapper orderMapper;
 
-    public void createOrder(final OrderForm orderForm, final ProductForm productForm, final UserForm userForm) {
-        final Order order = orderMapper.toOrder(orderForm,productForm,userForm);
-        orderRepository.save(order);
+    public List<Order> getAllOrders() {
+        return orderRepository.findAll();
+    }
+
+    public OrderLine getOrderLinebyId(final Long id) {
+      return   orderLineRepository.findById(id).orElseThrow();
+    }
+
+    public String getOrderdedProductName(Long id){
+      return   orderRepository.findById(id).get().getProductName();
     }
 
 

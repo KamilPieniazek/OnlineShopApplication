@@ -2,25 +2,22 @@ package pl.osa.osaapplication.domain;
 
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+import pl.osa.osaapplication.model.Role;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.List;
+
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "users")
+@Builder
 public class User {
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-//    @Column(name = "id")
-//    Long id;
 
     @Id
     @Email
@@ -46,14 +43,31 @@ public class User {
     private String preferredWayOfComunication;
 
 
+    @NotNull
+    @Column(name = "role")
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
-    @Column(columnDefinition = "varchar(255) default 'USER'")
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name = "users_to_roles",
-            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "email"),
-            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "name")
-    )
-    private List<Role> roles = new ArrayList<>();
+    public Role getRole() {
+        return role;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", role=" + role +
+                '}';
+    }
+
+//    @Column(columnDefinition = "varchar(255) default 'USER'")
+//    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+//    @JoinTable(name = "users_to_roles",
+//            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "email"),
+//            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "name")
+//    )
+//    private List<Role> roles = new ArrayList<>();
 
     //    @JoinColumn(name = "user_id",referencedColumnName = "id")
 //    @JoinColumn(name = "role_id",referencedColumnName = "name")

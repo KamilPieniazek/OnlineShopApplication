@@ -19,6 +19,7 @@ public class OrderLineMapper {
     public OrderLine toOrder(final ProductForm productForm) {
         final OrderLine orderLine = new OrderLine();
         Optional<Product> product = productRepository.findById(productForm.getTitle());
+//        Optional<Product> product1 = orderLineRepository.findByProduct(productForm.getTitle());
 
         orderLine.setProduct(product.get().getTitle());
         orderLine.setPrice(product.get().getPrice());

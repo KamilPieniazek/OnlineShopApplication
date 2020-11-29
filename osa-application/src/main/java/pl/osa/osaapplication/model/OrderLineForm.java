@@ -1,17 +1,19 @@
-package pl.osa.osaapplication.domain;
+package pl.osa.osaapplication.model;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
-@Entity(name = "OrderLine")
-public class OrderLine {
+public class OrderLineForm {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -22,6 +24,4 @@ public class OrderLine {
     private Long quantity;
 
     private double price;
-
-
 }

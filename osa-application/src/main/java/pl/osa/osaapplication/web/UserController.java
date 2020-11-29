@@ -2,18 +2,18 @@ package pl.osa.osaapplication.web;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import pl.osa.osaapplication.domain.User;
+import pl.osa.osaapplication.model.Role;
 import pl.osa.osaapplication.model.UserForm;
+import pl.osa.osaapplication.services.UserInfoService;
 import pl.osa.osaapplication.services.UserService;
 import pl.osa.osaapplication.services.validation.UserValidator;
 
 import javax.validation.Valid;
-import java.util.List;
+import java.util.Map;
 
 
 @RequiredArgsConstructor
@@ -23,11 +23,18 @@ public class UserController {
 
     private final UserService userService;
     private final UserValidator userValidator;
+    private final UserInfoService userInfoService;
 
     @GetMapping
     public String showUsersView(final ModelMap modelMap) {
-        modelMap.addAttribute("users", userService.getAllUsers());
+        String currentUser = userInfoService.getCurrentUser();
+        User byId = userService.getById(currentUser);
         modelMap.addAttribute("userForm", new UserForm());
+        modelMap.addAttribute("u", currentUser);
+       // modelMap.addAttribute("user",userService.getCurrentUser());
+        modelMap.addAllAttributes(Map.of(
+                "users", userService.getAllUsers(),
+                "roles", Role.allTypes()));
         return "users";
     }
 //

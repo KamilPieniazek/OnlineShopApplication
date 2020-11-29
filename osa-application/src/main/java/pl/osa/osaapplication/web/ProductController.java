@@ -17,6 +17,7 @@ import pl.osa.osaapplication.repositories.AuthorRepository;
 import pl.osa.osaapplication.repositories.OrderLineRepository;
 import pl.osa.osaapplication.services.OrderLineService;
 import pl.osa.osaapplication.services.ProductService;
+import pl.osa.osaapplication.services.UserService;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -31,11 +32,15 @@ public class ProductController {
 
     private final OrderLineService orderLineService;
 
+    private final UserService userService;
+
     @GetMapping
     public String showProductsView(final ModelMap modelMap) {
         modelMap.addAttribute("products", productService.getAllProducts());
         modelMap.addAttribute("productForm", new ProductForm());
         modelMap.addAttribute("authors", authorRepository.findAll());
+
+
 
         return "products";
     }
@@ -64,6 +69,7 @@ public class ProductController {
 
         Product product = productService.getProductById(title);
         model.addAttribute("product_details",product);
+        model.addAttribute("Dupa",productService.getProductById("Ksiazka"));
         return "product_details";
     }
 

@@ -14,8 +14,7 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User, String> {
     List<User> findAllByEmail(String email);
 
-    @Query("SELECT u.email FROM users u WHERE u.email=:email")
-   String findByEmail(@Param("email") String email);
+    User findByEmail(String email);
 
 
         }

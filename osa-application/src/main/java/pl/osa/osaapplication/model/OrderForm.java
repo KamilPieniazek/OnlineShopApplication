@@ -10,11 +10,5 @@ import lombok.NoArgsConstructor;
 @Data
 public class OrderForm {
 
-    private String username;
-
-    private double totalPrice;
-
-    private String address;
-
-
+    private String productsName;
 }

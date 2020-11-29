@@ -6,5 +6,5 @@ import pl.osa.osaapplication.domain.Product;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product,String> {
-
+Product findByTitle(String title);
 }

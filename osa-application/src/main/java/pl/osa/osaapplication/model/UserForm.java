@@ -2,11 +2,12 @@ package pl.osa.osaapplication.model;
 
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import org.hibernate.validator.constraints.Length;
-import pl.osa.osaapplication.domain.Role;
+//import pl.osa.osaapplication.domain.Role;
 
 import javax.persistence.Column;
 import javax.validation.Valid;
@@ -18,6 +19,7 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@Builder
 public class UserForm {
 
 
@@ -39,8 +41,8 @@ public class UserForm {
     @NotEmpty(message = "Please pick an option")
     private String preferredWayOfComunication;
 
-    @Column(name = "name", columnDefinition = "varchar(255) default 'USER'")
-    private Role role;
+//    @Column(name = "name", columnDefinition = "varchar(255) default 'USER'")
+//    private Role role;
 
     @AssertTrue
     public boolean isPasswordValid() {
