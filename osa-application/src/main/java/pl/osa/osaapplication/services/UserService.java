@@ -2,6 +2,8 @@ package pl.osa.osaapplication.services;
 
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.osa.osaapplication.domain.User;
@@ -23,12 +25,16 @@ public class UserService {
     }
 
     public void createUser(final UserForm userForm) {
-        final User user = userMapper.toUser(userForm);
+        final User user = userMapper.createUser(userForm);
         userRepository.save(user);
     }
 
-    public List<User> getByEmail(String email) {
-        return userRepository.findAllByEmail(email);
-    }
+//    public User getById(String email) {
+//        return userRepository.findByEmail(email);
+//    }
 
+    public User getById(String email) {
+        return userRepository.findById(email)
+                .orElseThrow(() -> new RuntimeException(String.format("User with id %s does not exist", email)));
+    }
 }

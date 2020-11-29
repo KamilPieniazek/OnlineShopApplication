@@ -22,30 +22,38 @@
 </head>
 <body>
 <h1>Cart</h1>
-<div th:each="order : ${orderLine}">
+<div th:each="order : ${orderLines}">
 
-    <p th:text="'Product name: ' + ${order.getProduct()}"></p>
+    <p th:text="'Product name: ' + ${order.getProduct()()}"></p>
     <p th:text="'Price: ' + ${order.getPrice()}"></p>
     <p th:text="'Quantity: '+${order.getQuantity()}"></p>
 </div>
 
 
-<button onClick=createOrder()>Order</button>
-<div class="createOrder">
-    <form th:action="@{/cart/order}" method="POST" th:object="${OrderForm}">
-        <hi>Order resume</hi>
-        <fieldset>
-            <label>Username: </label>
-            <p th:text="*{username}"></p>
-            <label> Total amount: </label>
-            <p th:text="*{totalPrice}"></p>
-            <label> Adress: </label>
-            <p th:text="*{address}"></p>
+<!--<button onClick=createOrder()>Order</button>-->
+<!--<div class="createOrder">-->
+<!--    <form th:action="@{/cart}" method="POST" th:object="${orderLine} ">-->
+<!--        <hi>Order resume</hi>-->
+<!--        <fieldset>-->
+<!--&lt;!&ndash;            <div th:object="${Product}">&ndash;&gt;-->
+<!--&lt;!&ndash;                <label>Product Name:</label>&ndash;&gt;-->
+<!--&lt;!&ndash;                <p th:text="*{product}"></p>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--            <label>Name:</label>-->
+<!--            <div th:each="order:${orderLine}">-->
+<!--                <p th:text="${order.product}"></p>-->
+<!--            </div>-->
+<!--&lt;!&ndash;            <label>Username: </label>&ndash;&gt;-->
+<!--&lt;!&ndash;            <p th:text="*{username}"></p>&ndash;&gt;-->
+<!--&lt;!&ndash;            <label> Total amount: </label>&ndash;&gt;-->
+<!--&lt;!&ndash;            <p th:text="*{totalPrice}"></p>&ndash;&gt;-->
+<!--&lt;!&ndash;            <label> Adress: </label>&ndash;&gt;-->
+<!--&lt;!&ndash;            <p th:text="*{address}"></p>&ndash;&gt;-->
 
-            <button type="submit">Submit order</button>
-        </fieldset>
-    </form>
-</div>
+<!--            <button type="submit">Submit order</button>-->
+<!--        </fieldset>-->
+<!--    </form>-->
+<!--</div>-->
 
 </body>
 </html>
