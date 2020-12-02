@@ -1,14 +1,12 @@
-package pl.osa.osaapplication.services;
+package pl.osa.osaapplication.services.users;
 
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.osa.osaapplication.domain.User;
 import pl.osa.osaapplication.model.UserForm;
 import pl.osa.osaapplication.repositories.UserRepository;
+import pl.osa.osaapplication.services.users.UserMapper;
 
 import java.util.List;
 

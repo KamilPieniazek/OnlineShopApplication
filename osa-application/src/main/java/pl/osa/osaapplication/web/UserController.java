@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import pl.osa.osaapplication.domain.User;
 import pl.osa.osaapplication.model.Role;
 import pl.osa.osaapplication.model.UserForm;
-import pl.osa.osaapplication.services.UserInfoService;
-import pl.osa.osaapplication.services.UserService;
+import pl.osa.osaapplication.services.users.UserInfoService;
+import pl.osa.osaapplication.services.users.UserService;
 import pl.osa.osaapplication.services.validation.UserValidator;
 
 import javax.validation.Valid;
@@ -31,7 +31,6 @@ public class UserController {
         User byId = userService.getById(currentUser);
         modelMap.addAttribute("userForm", new UserForm());
         modelMap.addAttribute("u", currentUser);
-       // modelMap.addAttribute("user",userService.getCurrentUser());
         modelMap.addAllAttributes(Map.of(
                 "users", userService.getAllUsers(),
                 "roles", Role.allTypes()));

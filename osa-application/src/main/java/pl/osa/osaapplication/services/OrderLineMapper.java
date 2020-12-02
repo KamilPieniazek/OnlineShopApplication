@@ -7,6 +7,7 @@ import pl.osa.osaapplication.domain.Product;
 import pl.osa.osaapplication.model.ProductForm;
 import pl.osa.osaapplication.repositories.OrderLineRepository;
 import pl.osa.osaapplication.repositories.ProductRepository;
+import pl.osa.osaapplication.services.users.UserInfoService;
 
 import java.util.Optional;
 
@@ -15,6 +16,7 @@ import java.util.Optional;
 public class OrderLineMapper {
     private final OrderLineRepository orderLineRepository;
     private final ProductRepository productRepository;
+    private final UserInfoService userInfoService;
 
     public OrderLine toOrder(final ProductForm productForm) {
         final OrderLine orderLine = new OrderLine();
@@ -24,7 +26,7 @@ public class OrderLineMapper {
         orderLine.setProduct(product.get().getTitle());
         orderLine.setPrice(product.get().getPrice());
         orderLine.setQuantity(productForm.getQuantity());
-
+        orderLine.setUsername(userInfoService.getCurrentUser());
         return orderLine;
     }
 }

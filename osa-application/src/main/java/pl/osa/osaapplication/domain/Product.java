@@ -47,6 +47,9 @@ public class Product {
     @Column(name = "quantity")
     private Long quantity;
 
+    @OneToOne
+    @JoinColumn(name = "product_id")
+    private Stock stocks;
 
 
 

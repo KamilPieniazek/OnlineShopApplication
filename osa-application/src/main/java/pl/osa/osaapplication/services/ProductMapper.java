@@ -5,11 +5,13 @@ import org.springframework.stereotype.Component;
 import pl.osa.osaapplication.domain.Product;
 import pl.osa.osaapplication.model.ProductForm;
 import pl.osa.osaapplication.repositories.AuthorRepository;
+import pl.osa.osaapplication.repositories.StockRepository;
 
 @RequiredArgsConstructor
 @Component
 public class ProductMapper {
     private final AuthorRepository authorRepository;
+    private final StockRepository stockRepository;
 
     public Product toProduct(final ProductForm productForm) {
         final Product product = new Product();
@@ -21,6 +23,7 @@ public class ProductMapper {
         product.setPrice(productForm.getPrice());
         product.setCategory(productForm.getCategoryName());
         product.setQuantity(productForm.getQuantity());
+        product.setStocks(stockRepository.findByProduct(productForm.getTitle()));
         return product;
     }
 }

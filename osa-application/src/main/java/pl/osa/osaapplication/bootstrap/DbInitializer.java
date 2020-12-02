@@ -15,40 +15,39 @@ import pl.osa.osaapplication.model.ProductType;
 import pl.osa.osaapplication.model.Role;
 import pl.osa.osaapplication.repositories.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
 @RequiredArgsConstructor
 @Transactional
-public class DbInitializer implements CommandLineRunner  {
+public class DbInitializer implements CommandLineRunner {
     @Value("test@test.com")
     private String email;
     private final UserRepository userRepository;
-
     private final AuthorRepository authorRepository;
-
-    private  final ProductRepository productRepository;
+    private final ProductRepository productRepository;
     private final PasswordEncoder passwordEncoder;
-    private final OrderLineRepository orderLineRepository;
+    private final StockRepository stockRepository;
 
     @Override
     public void run(String... args) throws Exception {
 
         String kamilpie12 = passwordEncoder.encode("Kamilpie12");
-        userRepository.save(new User("Kamil@o2.pl",kamilpie12,"Gdansk","Dragana","mail",
+        userRepository.save(new User("Kamil@o2.pl", kamilpie12, "Gdansk", "Dragana", "mail",
                 Role.ADMIN));
 
 
-        authorRepository.save(new Author("Kamil Jastrzembowski",List.of()));
+        authorRepository.save(new Author("Kamil Jastrzembowski", List.of()));
         Author kamil_pieniążek = authorRepository.save(new Author("Kamil Pieniążek", List.of()));
+        Stock stock=stockRepository.save(new Stock());
 
 
-        productRepository.save(new Product("Ksiazka","Opis", new byte[]{},"book", 34.0, ProductType.BOOK,kamil_pieniążek,1L));
+        productRepository.save(new Product("Ksiazka", "Opis", new byte[]{}, "book", 34.0, ProductType.BOOK, kamil_pieniążek, 1L,stock));
 
-        OrderLine ksiazka = orderLineRepository.save(new OrderLine(null, "Ksiazka", 4L, 34.0));
+      //  OrderLine ksiazka = orderLineRepository.save(new OrderLine(null, "Ksiazka", 4L, 34.0, null));
 //        orderRepository.save(new Order(null,"kamilpieniazek96@gmail.com",34.0,"Dupa","Dupa", ksiazka));
     }
-
 
 
 }

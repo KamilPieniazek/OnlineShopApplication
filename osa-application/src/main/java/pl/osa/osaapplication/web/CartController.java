@@ -3,15 +3,16 @@ package pl.osa.osaapplication.web;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
-import pl.osa.osaapplication.model.OrderLineForm;
-import pl.osa.osaapplication.model.ProductForm;
-import pl.osa.osaapplication.model.UserForm;
+import pl.osa.osaapplication.domain.OrderLine;
+import pl.osa.osaapplication.model.OrderForm;
 import pl.osa.osaapplication.repositories.OrderLineRepository;
 import pl.osa.osaapplication.repositories.ProductRepository;
 import pl.osa.osaapplication.services.OrderLineService;
-import pl.osa.osaapplication.services.OrderService;
+
+import pl.osa.osaapplication.services.users.UserInfoService;
+
+import java.util.List;
 
 
 @Controller
@@ -22,18 +23,38 @@ public class CartController {
     private final OrderLineService orderLineService;
     private final OrderLineRepository orderLineRepository;
     private final ProductRepository productRepository;
+//    private final OrderService orderService;
+    private final UserInfoService userInfoService;
 
-    private final OrderService orderService;
 
     @GetMapping
     public String showCartView(final ModelMap modelMap) {
-        modelMap.addAttribute("orderLines", orderLineService.getAllOrderLines());
+        modelMap.addAttribute("orderLines", orderLineService.getAllOrdersByUsername());
+        modelMap.addAttribute("orderForm", new OrderForm());
+
 //        modelMap.addAttribute("orders",orderService.getAllOrders());
         return "cart";
     }
 
-//    @GetMapping("/order")
-//    public String createOrder() {
+    @GetMapping("/cart")
+    public List<OrderLine> getAllOrderLinesByUsername() {
+        return orderLineService.getAllOrdersByUsername();
+
+    }
+
+
+
+//    @RequestMapping(value = "/cart/order", method = {RequestMethod.GET, RequestMethod.POST})
+//    public String createOrder(@ModelAttribute(value = "orderForm") final OrderForm orderForm, final ModelMap modelMap) {
+//
+//        orderService.createOrder(orderForm);
+//        return "redirect:/cart";
+//
+//    }
+
+
+//    @GetMapping
+//    public String createOrder(){
 //
 //    }
 

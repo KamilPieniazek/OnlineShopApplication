@@ -2,22 +2,16 @@ package pl.osa.osaapplication.web;
 
 import lombok.RequiredArgsConstructor;
 //import org.springframework.security.access.annotation.Secured;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
-import pl.osa.osaapplication.domain.Author;
-import pl.osa.osaapplication.domain.OrderLine;
 import pl.osa.osaapplication.domain.Product;
-import pl.osa.osaapplication.domain.User;
 import pl.osa.osaapplication.model.ProductForm;
-import pl.osa.osaapplication.model.UserForm;
 import pl.osa.osaapplication.repositories.AuthorRepository;
-import pl.osa.osaapplication.repositories.OrderLineRepository;
 import pl.osa.osaapplication.services.OrderLineService;
 import pl.osa.osaapplication.services.ProductService;
-import pl.osa.osaapplication.services.UserService;
+import pl.osa.osaapplication.services.users.UserService;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -69,7 +63,6 @@ public class ProductController {
 
         Product product = productService.getProductById(title);
         model.addAttribute("product_details",product);
-        model.addAttribute("Dupa",productService.getProductById("Ksiazka"));
         return "product_details";
     }
 

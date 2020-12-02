@@ -1,4 +1,4 @@
-package pl.osa.osaapplication.services;
+package pl.osa.osaapplication.services.users;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;

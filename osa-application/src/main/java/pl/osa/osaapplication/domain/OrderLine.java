@@ -15,13 +15,20 @@ public class OrderLine {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "id")
     private Long id;
 
+    @Column(name = "product")
     private String product;
 
+    @Column(name = "quantity")
     private Long quantity;
 
+    @Column(name = "price")
     private double price;
+
+    @Column(name = "username")
+    private String username;
 
 
 }
