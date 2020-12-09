@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.osa.osaapplication.domain.OrderLine;
 import pl.osa.osaapplication.domain.Product;
+import pl.osa.osaapplication.model.OrderLineForm;
 import pl.osa.osaapplication.model.ProductForm;
 import pl.osa.osaapplication.repositories.OrderLineRepository;
 import pl.osa.osaapplication.repositories.ProductRepository;
@@ -18,14 +19,14 @@ public class OrderLineMapper {
     private final ProductRepository productRepository;
     private final UserInfoService userInfoService;
 
-    public OrderLine toOrder(final ProductForm productForm) {
+    public OrderLine toOrder(final OrderLineForm orderLineForm) {
         final OrderLine orderLine = new OrderLine();
-        Optional<Product> product = productRepository.findById(productForm.getTitle());
+        Optional<Product> product = productRepository.findById(orderLineForm.getProduct());
 //        Optional<Product> product1 = orderLineRepository.findByProduct(productForm.getTitle());
 
         orderLine.setProduct(product.get().getTitle());
         orderLine.setPrice(product.get().getPrice());
-        orderLine.setQuantity(productForm.getQuantity());
+        orderLine.setQuantity(orderLineForm.getQuantity());
         orderLine.setUsername(userInfoService.getCurrentUser());
         return orderLine;
     }

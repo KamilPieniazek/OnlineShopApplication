@@ -30,5 +30,9 @@ public class OrderLine {
     @Column(name = "username")
     private String username;
 
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    private Order order;
+
 
 }

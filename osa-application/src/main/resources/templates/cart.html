@@ -30,11 +30,9 @@
     <p th:text="'Quantity: '+ ${UsersOrders.getQuantity()}"></p>
 </div>
 
-
-<a th:href="@{order}">Submit order!</a>
-
-
-
+<form th:action="@{cart}" method="post">
+<button  type="submit">Submit order!</button>
+</form>
 
 </div>
 

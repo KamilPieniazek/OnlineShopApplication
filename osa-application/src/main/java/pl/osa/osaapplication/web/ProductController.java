@@ -7,6 +7,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import pl.osa.osaapplication.domain.Product;
+import pl.osa.osaapplication.model.OrderLineForm;
 import pl.osa.osaapplication.model.ProductForm;
 import pl.osa.osaapplication.repositories.AuthorRepository;
 import pl.osa.osaapplication.services.OrderLineService;
@@ -57,18 +58,20 @@ public class ProductController {
     }
 
 
-    @GetMapping(value = "/details/{title}")
+    //@GetMapping(value = "/details/{title}")
     @RequestMapping(value = "/details/{title}", method = {RequestMethod.GET, RequestMethod.POST})
     public String getProduct(@PathVariable final String title, ModelMap model) {
 
         Product product = productService.getProductById(title);
         model.addAttribute("product_details",product);
+        model.addAttribute("orderLineForm", new OrderLineForm());
         return "product_details";
     }
-
+    // TODO: przeniesc do cartController
     @RequestMapping(value = "/details/{title}/addToChart", method = {RequestMethod.GET, RequestMethod.POST})
-    public String createOrderLine(final ProductForm productForm) {
-        orderLineService.createOrderLine(productForm);
+    public String createOrderLine(final OrderLineForm orderLineForm, @PathVariable String title) {
+        orderLineForm.setProduct(title);
+        orderLineService.createOrderLine(orderLineForm);
         return "redirect:/products/details/{title}";
     }
 

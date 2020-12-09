@@ -37,7 +37,7 @@ public class ProductForm {
 
     private Long quantity;
 
-    private Long inStock;
+
 
 
 }

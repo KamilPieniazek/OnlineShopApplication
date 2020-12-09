@@ -22,8 +22,8 @@ public class ProductMapper {
         product.setType(productForm.getProductType());
         product.setPrice(productForm.getPrice());
         product.setCategory(productForm.getCategoryName());
-        product.setQuantity(productForm.getQuantity());
-        product.setStocks(stockRepository.findByProduct(productForm.getTitle()));
+        product.setInStock(productForm.getQuantity().intValue());
+      //  product.setQuantity(productForm.getQuantity());
         return product;
     }
 }

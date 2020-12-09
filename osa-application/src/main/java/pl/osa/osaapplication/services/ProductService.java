@@ -9,7 +9,9 @@ import pl.osa.osaapplication.model.ProductForm;
 import pl.osa.osaapplication.model.UserForm;
 import pl.osa.osaapplication.repositories.AuthorRepository;
 import pl.osa.osaapplication.repositories.ProductRepository;
+
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -63,9 +65,19 @@ public class ProductService {
         productRepository.save(existingProduct);
     }
 
-    public void removeProduct(final String id){
+    public void removeProduct(final String id) {
         getProductById(id);
         productRepository.deleteById(id);
+    }
+
+    public void reduceAmount(String id, int count) throws Exception {
+        Optional<Product> optionalProduct = productRepository.findById(id);
+        if (optionalProduct.isEmpty()) {
+            throw new Exception("Product not found");
+        }
+        Product product = optionalProduct.get();
+        product.setInStock(product.getInStock() - count);
+        productRepository.save(product);
     }
 
 }

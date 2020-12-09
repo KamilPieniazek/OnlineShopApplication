@@ -10,7 +10,7 @@ public interface OrderLineRepository extends JpaRepository<OrderLine, Long> {
 
     List<OrderLine> findByUsername(String username);
 
-    // OrderLine findByUsernames(String username);
+ List <OrderLine> findByUsernameAndOrderIsNull(String username);
 
 
 }

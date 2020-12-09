@@ -20,7 +20,7 @@
 </div>
 <div class="update">
     <form th:action="@{/products/details/{title}/update (title=${product_details.title})}" method="post" th:object="${product_details}">
-        <h1>Update product
+        <h1>Update product</h1>
 
         <fieldset>
             <label>Title: </label>
@@ -64,10 +64,10 @@
     </form>
 </div>
 <a th:href="@{/products/details/{title}/remove (title=${product_details.title})}">Delete product</a>
-<form th:action="@{/products/details/{title}/addToChart (title=${product_details.title})}" method="post" th:object="${product_details}">
+<form th:action="@{/products/details/{title}/addToChart (title=${product_details.title})}" method="post" th:object="${orderLineForm}">
 
         <label for="quantity">Q: </label>
-        <input id="quantity" type="number" th:field="*{quantity}" th:value="${product_details.quantity}">
+        <input id="quantity" type="number" th:field="*{quantity}" >
     <input type="submit">
 
 </form>

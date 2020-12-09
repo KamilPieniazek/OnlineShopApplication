@@ -23,5 +23,4 @@ public class OrderLineForm {
 
     private Long quantity;
 
-    private double price;
 }

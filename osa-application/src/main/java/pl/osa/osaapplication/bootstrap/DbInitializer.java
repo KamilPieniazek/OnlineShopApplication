@@ -34,8 +34,16 @@ public class DbInitializer implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         String kamilpie12 = passwordEncoder.encode("Kamilpie12");
-        userRepository.save(new User("Kamil@o2.pl", kamilpie12, "Gdansk", "Dragana", "mail",
+        userRepository.save(new User("Kamil@o2.pl",
+                kamilpie12,
+                "Gdansk",
+                "Dragana",
+                "mail",
                 Role.ADMIN));
+
+        userRepository.save(new User("Pamil@o2.pl", kamilpie12, "Gdansk", "Dragana", "mail",
+                Role.USER));
+
 
 
         authorRepository.save(new Author("Kamil Jastrzembowski", List.of()));
@@ -43,7 +51,9 @@ public class DbInitializer implements CommandLineRunner {
         Stock stock=stockRepository.save(new Stock());
 
 
-        productRepository.save(new Product("Ksiazka", "Opis", new byte[]{}, "book", 34.0, ProductType.BOOK, kamil_pieniążek, 1L,stock));
+        productRepository.save(new Product("Ksiazka", "Opis", new byte[]{}, "book", 34.0, ProductType.BOOK, kamil_pieniążek,10));
+        productRepository.save(new Product("Gazwta", "Opis", new byte[]{}, "book", 34.0, ProductType.BOOK, kamil_pieniążek,  100));
+        productRepository.save(new Product("Plyta", "Opis", new byte[]{}, "book", 34.0, ProductType.BOOK, kamil_pieniążek,100));
 
       //  OrderLine ksiazka = orderLineRepository.save(new OrderLine(null, "Ksiazka", 4L, 34.0, null));
 //        orderRepository.save(new Order(null,"kamilpieniazek96@gmail.com",34.0,"Dupa","Dupa", ksiazka));
