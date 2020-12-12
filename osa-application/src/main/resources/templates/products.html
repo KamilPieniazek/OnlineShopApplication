@@ -22,8 +22,7 @@
 </head>
 <body>
 
-<a th:href="@{/users}">users</a>
-<a th:href="@{/cart}">chart</a>
+<div th:insert="fragments::menu"></div>
 <button onClick=addProduct()>Add product</button>
 <div class="addProduct">
     <form th:action="@{/products/addProduct}" method="POST" th:object="${productForm}">

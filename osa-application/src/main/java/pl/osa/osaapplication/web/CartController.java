@@ -48,8 +48,8 @@ public class CartController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        return "order/" + order.getId().toString();
+return "order_summary";
+       // return "order/" + order.getId().toString();
     }
 
 
