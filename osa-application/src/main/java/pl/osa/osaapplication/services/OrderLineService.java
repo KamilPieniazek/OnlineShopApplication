@@ -32,6 +32,9 @@ public class OrderLineService {
         return orderLineRepository.findByUsername(userInfoService.getCurrentUser());
     }
 
+    public void  deleteallOrderLines(){
+        orderLineRepository.deleteAll();
+    }
 
 
 }
