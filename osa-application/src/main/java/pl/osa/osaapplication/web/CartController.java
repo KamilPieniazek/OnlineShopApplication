@@ -23,10 +23,8 @@ import java.util.List;
 public class CartController {
 
     private final OrderLineService orderLineService;
-    private final OrderLineRepository orderLineRepository;
-    private final ProductRepository productRepository;
     private final OrderService orderService;
-    private final UserInfoService userInfoService;
+
 
 
     @GetMapping
@@ -34,38 +32,25 @@ public class CartController {
         modelMap.addAttribute("orderLines", orderLineService.getAllOrdersByUsername());
         modelMap.addAttribute("orderForm", new OrderForm());
 
-//        modelMap.addAttribute("orders",orderService.getAllOrders());
         return "cart";
     }
 
 
-
     @PostMapping
-    public String submitOrder()  {
+    public String submitOrder() {
         Order order = null;
+
         try {
             order = orderService.submitOrder();
         } catch (Exception e) {
             e.printStackTrace();
         }
-return "order_summary";
-       // return "order/" + order.getId().toString();
+        orderLineService.deleteallOrderLines();
+        return "order_summary";
+        // return "order/" + order.getId().toString();
     }
 
 
-//    @RequestMapping(value = "/cart/order", method = {RequestMethod.GET, RequestMethod.POST})
-//    public String createOrder(@ModelAttribute(value = "orderForm") final OrderForm orderForm, final ModelMap modelMap) {
-//
-//        orderService.createOrder(orderForm);
-//        return "redirect:/cart";
-//
-//    }
-
-
-//    @GetMapping
-//    public String createOrder(){
-//
-//    }
 
 
 }

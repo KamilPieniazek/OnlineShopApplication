@@ -5,14 +5,23 @@
     <title>Title</title>
 </head>
 <body>
-<div th:fragment="menu">
-    <a th:href="@{/users}">users</a>
-    <a th:href="@{/cart}">chart</a>
-    <form th:action="@{/logout}" method="POST" style="float: right;">
+<div th:fragment="menu" >
+<div style="display: flex">
+    <form th:action="@{/products}" style="margin: 5px">
+        <input type="submit" value="Products"/>
+    </form>
+    <form th:action="@{/users}" style="margin: 5px">
+        <input type="submit" value="Users"/>
+    </form>
+    <form th:action="@{/cart}" style="margin: 5px">
+        <input type="submit" value="Cart"/>
+    </form>
+</div>
+    <form th:action="@{/logout}" method="POST" style="float: right">
         <input type="submit" value="Logout"/>
     </form>
 
-
 </div>
+
 </body>
 </html>
