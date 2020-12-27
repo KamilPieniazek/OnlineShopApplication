@@ -1,11 +1,8 @@
 package pl.osa.osaapplication.bootstrap;
 
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.context.event.EventListener;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +12,6 @@ import pl.osa.osaapplication.model.ProductType;
 import pl.osa.osaapplication.model.Role;
 import pl.osa.osaapplication.repositories.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -39,10 +35,10 @@ public class DbInitializer implements CommandLineRunner {
                 "Gdansk",
                 "Dragana",
                 "mail",
-                Role.ADMIN));
+                Role.ROLE_ADMIN));
 
         userRepository.save(new User("Pamil@o2.pl", kamilpie12, "Gdansk", "Dragana", "mail",
-                Role.USER));
+                Role.ROLE_USER));
 
 
 

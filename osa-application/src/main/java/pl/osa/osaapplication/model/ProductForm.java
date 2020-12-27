@@ -3,9 +3,11 @@ package pl.osa.osaapplication.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.Lob;
 import javax.validation.constraints.NotEmpty;
 
 
@@ -22,7 +24,8 @@ public class ProductForm {
 
     //url
     //@NotEmpty(message = "Please load a picture of a product")
-    private byte[] image;
+
+    private MultipartFile image;
 
 
     // @NotEmpty(message = "Please add price")

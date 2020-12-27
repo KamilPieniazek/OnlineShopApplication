@@ -24,7 +24,7 @@ public class UserMapper {
                 .address(userForm.getAddress())
                 .city(userForm.getCity())
                 .preferredWayOfComunication(userForm.getPreferredWayOfComunication())
-                .role(Role.USER)
+                .role(Role.ROLE_USER)
                 .build();
     }
 }

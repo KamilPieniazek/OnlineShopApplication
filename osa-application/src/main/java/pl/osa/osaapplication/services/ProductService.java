@@ -3,6 +3,7 @@ package pl.osa.osaapplication.services;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 import pl.osa.osaapplication.domain.Product;
 import pl.osa.osaapplication.domain.User;
 import pl.osa.osaapplication.model.ProductForm;
@@ -10,6 +11,7 @@ import pl.osa.osaapplication.model.UserForm;
 import pl.osa.osaapplication.repositories.AuthorRepository;
 import pl.osa.osaapplication.repositories.ProductRepository;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,15 +28,29 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public void addProduct(final ProductForm productForm) {
+    public void addProduct(final ProductForm productForm) throws IOException {
         final Product product = productMapper.toProduct(productForm);
+//        try {
+//            product.setImage(file.getBytes());
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+
         productRepository.save(product);
     }
 
+    public void uplodFile(final Product product,MultipartFile file){
+                try {
+            product.setImage(file.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     public Product getProductById(String id) {
         return productRepository.findById(id)
                 .orElseThrow();
     }
+
 
     public void updateProduct(final ProductForm productForm, final String id) {
         final Product existingProduct = getProductById(id);
