@@ -1,11 +1,13 @@
 package pl.osa.osaapplication.config;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.core.GrantedAuthorityDefaults;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import pl.osa.osaapplication.services.users.CustomUserDetailsService;
 
@@ -48,5 +50,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected UserDetailsService userDetailsService() {
         return customUserDetailsService;
     }
+
+//    @Bean
+//    GrantedAuthorityDefaults grantedAuthorityDefaults(){
+//        return new GrantedAuthorityDefaults("");
+//    }
 }
 

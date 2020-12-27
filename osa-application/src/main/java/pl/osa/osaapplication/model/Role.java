@@ -4,9 +4,10 @@ import java.util.Arrays;
 import java.util.List;
 
 public enum Role {
-    USER,
-    ADMIN;
+    ROLE_USER,
+    ROLE_ADMIN;
 
     public static List<Role> allTypes(){
         return Arrays.asList(Role.values()); }
+
 }

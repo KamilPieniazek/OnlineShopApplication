@@ -3,6 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
+
+    <script> function updateProduct() {
+        let popupProduct = document.querySelector('.updateProduct');
+        popupProduct.classList.toggle('activ')
+    }</script>
+    <style>
+        .addProduct {
+            visibility: hidden;
+        }
+
+        .addProduct.activ {
+            visibility: visible;
+            opacity: 1;
+            transition: 0.5s;
+        }
+    </style>
 </head>
 <body>
 
@@ -18,7 +35,8 @@
 
 
 </div>
-<div class="update">
+<button   onClick=updateProduct()>Update product</button></div>
+<div class="updateProduct">
     <form th:action="@{/products/details/{title}/update (title=${product_details.title})}" method="post" th:object="${product_details}">
         <h1>Update product</h1>
 
@@ -71,7 +89,6 @@
     <input type="submit">
 
 </form>
-
 <button onclick="increment()">+</button>
 <button onclick="decrement()">-</button>
 <script>
