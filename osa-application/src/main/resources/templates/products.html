@@ -2,7 +2,14 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+
+    <title>Kamil's Online Bookstore</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--    <link rel="stylesheet" href="osa-application/css/bootstrap.css">-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 
     <script> function addProduct() {
         let popupProduct = document.querySelector('.addProduct');
@@ -22,12 +29,13 @@
 </head>
 <body>
 
-<pre>
-Logged user: <span sec:authentication="name">Bob</span>
-Roles: <span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span>
-</pre>
+<!--<pre>-->
+<!--Logged user: <span sec:authentication="name">Bob</span>-->
+<!--Roles: <span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span>-->
+<!--</pre>-->
 
-<div th:insert="fragments::menu"></div>
+<!--<div th:insert="fragments::menu"></div>-->
+<div th:insert="fragments::navbar"></div>
 <div sec:authorize="hasRole('ROLE_ADMIN')">
     <button   onClick=addProduct()>Add product</button></div>
 <div class="addProduct">

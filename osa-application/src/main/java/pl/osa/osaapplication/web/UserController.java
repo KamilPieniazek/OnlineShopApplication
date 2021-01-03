@@ -34,6 +34,7 @@ public class UserController {
         modelMap.addAllAttributes(Map.of(
                 "users", userService.getAllUsers(),
                 "roles", Role.allTypes()));
+
         return "users";
     }
 //
@@ -45,12 +46,13 @@ public class UserController {
     @RequestMapping(value = "/sign-up", method = {RequestMethod.GET, RequestMethod.POST})
     public String createUser(@Valid @ModelAttribute(name = "userForm") final UserForm userForm,
                              final Errors errors) {
-        userValidator.validateEmail(userForm,errors);
-      if (errors.hasErrors()) {
+        userValidator.validateEmail(userForm, errors);
+        if (errors.hasErrors()) {
 
             return "/users";
         }
         userService.createUser(userForm);
+
         return "redirect:/users";
     }
 }
