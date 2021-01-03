@@ -1,26 +1,27 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:insert="fragments::headerFragment">
     <meta charset="UTF-8">
     <title>Cart</title>
 
-    <script> function createOrder() {
-        let popupOrder = document.querySelector('.createOrder');
-        popupOrder.classList.toggle('activ')
-    }</script>
-    <style>
-        .createOrder {
-            visibility: hidden;
-        }
+<!--    <script> function createOrder() {-->
+<!--        let popupOrder = document.querySelector('.createOrder');-->
+<!--        popupOrder.classList.toggle('activ')-->
+<!--    }</script>-->
+<!--    <style>-->
+<!--        .createOrder {-->
+<!--            visibility: hidden;-->
+<!--        }-->
 
-        .createOrder.activ {
-            visibility: visible;
-            opacity: 1;
-            transition: 0.5s;
-        }
-    </style>
+<!--        .createOrder.activ {-->
+<!--            visibility: visible;-->
+<!--            opacity: 1;-->
+<!--            transition: 0.5s;-->
+<!--        }-->
+<!--    </style>-->
 </head>
 <body>
+<div th:insert="fragments::navbar">
 <div th:insert="fragments::menu"></div>
 <h1>Cart</h1>
 
