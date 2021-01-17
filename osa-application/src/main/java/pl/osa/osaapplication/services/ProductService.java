@@ -39,13 +39,6 @@ public class ProductService {
         productRepository.save(product);
     }
 
-    public void uplodFile(final Product product,MultipartFile file){
-                try {
-            product.setImage(file.getBytes());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
     public Product getProductById(String id) {
         return productRepository.findById(id)
                 .orElseThrow();

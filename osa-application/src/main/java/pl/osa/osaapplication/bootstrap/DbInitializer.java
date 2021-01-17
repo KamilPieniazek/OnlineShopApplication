@@ -48,7 +48,7 @@ public class DbInitializer implements CommandLineRunner {
 
 
         productRepository.save(new Product("Ksiazka", "Opis", new byte[]{}, "book", 34.0, ProductType.BOOK, kamil_pieniążek,10));
-        productRepository.save(new Product("Gazwta", "Opis", new byte[]{}, "book", 34.0, ProductType.BOOK, kamil_pieniążek,  100));
+        productRepository.save(new Product("Gazeta", "Opis", new byte[]{}, "book", 34.0, ProductType.BOOK, kamil_pieniążek,  100));
         productRepository.save(new Product("Plyta", "Opis", new byte[]{}, "book", 34.0, ProductType.BOOK, kamil_pieniążek,100));
 
       //  OrderLine ksiazka = orderLineRepository.save(new OrderLine(null, "Ksiazka", 4L, 34.0, null));

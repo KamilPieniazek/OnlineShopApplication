@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <div th:replace="fragments::header"></div>
     <meta charset="UTF-8">
     <title>Title</title>
 
@@ -22,16 +23,16 @@
     </style>
 </head>
 <body>
+<div th:insert="fragments::navbar"></div>
 
+<!--<div  th:object="${product_details}">-->
+<!--    <p th:text="'Title: ' + ${product_details.getTitle()}"></p>-->
+<!--&lt;!&ndash;    <p th:text="'Author: ' + ${product_details.getAuthor()}"></p>&ndash;&gt;-->
+<!--    <p th:text="'Price: ' + ${product_details.getPrice()}"></p>-->
+<!--    <p th:text="'Description: ' + ${product_details.getDescription()}"></p>-->
+<!--    <a th:href="@{/products}">Back</a>-->
 
-<div  th:object="${product_details}">
-    <p th:text="'Title: ' + ${product_details.getTitle()}"></p>
-<!--    <p th:text="'Author: ' + ${product_details.getAuthor()}"></p>-->
-    <p th:text="'Price: ' + ${product_details.getPrice()}"></p>
-    <p th:text="'Description: ' + ${product_details.getDescription()}"></p>
-    <a th:href="@{/products}">Back</a>
-
-</div>
+<!--</div>-->
 
 
 </div>
@@ -100,6 +101,7 @@
         document.getElementById('quantity').stepDown();
     }
 </script>
+<div th:insert="fragments::footer"></div>
 
 </body>
 </html>

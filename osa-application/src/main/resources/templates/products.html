@@ -1,15 +1,19 @@
+<!------ Include the above in your HEAD tag ---------->
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
 <head>
-    <meta charset="UTF-8">
-
-    <title>Kamil's Online Bookstore</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--    <link rel="stylesheet" href="osa-application/css/bootstrap.css">-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
+    <div th:replace="fragments::header"></div>
+<!--    <meta charset="utf-8">-->
+<!--    <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
+<!--    <title>Kamil's Online Bookstore</title>-->
+<!--    &lt;!&ndash;    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"/>&ndash;&gt;-->
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+<!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
 
     <script> function addProduct() {
         let popupProduct = document.querySelector('.addProduct');
@@ -27,15 +31,36 @@
         }
     </style>
 </head>
+
 <body>
-
-<!--<pre>-->
-<!--Logged user: <span sec:authentication="name">Bob</span>-->
-<!--Roles: <span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span>-->
-<!--</pre>-->
-
-<!--<div th:insert="fragments::menu"></div>-->
+<!--<div th:fragment="fragment" th:remove="tag"></div>-->
 <div th:insert="fragments::navbar"></div>
+
+<div class="col" >
+    <div class="row" >
+        <div class="col-12 col-md-6 col-lg-4"  th:each="product : ${products}">
+            <div class="card" >
+                <img class="card-img-top" src="https://dummyimage.com/600x400/55595c/fff"  style="max-height: 40vh" th:unless="${#lists.isEmpty(product.getImage())}"
+                     th:src="@{/products/details/{title}/image (title=${product.title})}" alt="Card image cap"/>
+                <div class="card-body">
+                    <h4 class="card-title">  <a th:href="@{/products/details/{title} (title=${product.title})}" title="View Product"
+                                                 th:text="${product.getTitle()}"></a></h4>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.</p>
+                    <div class="col">
+                        <div class="col">
+                            <p class="btn btn-danger btn-block" th:text="${product.getPrice()}"></p>
+                        </div>
+                        <div class="col">
+                            <a href="#" class="btn btn-success btn-block">Add to cart</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div sec:authorize="hasRole('ROLE_ADMIN')">
     <button   onClick=addProduct()>Add product</button></div>
 <div class="addProduct">
@@ -88,22 +113,32 @@
                th:text="${#fields.errors('quantity')}"></p>
 
             <button type="submit">Add product</button>
-            </fieldset>
+        </fieldset>
     </form>
 </div>
 
-<h1>Products</h1>
+<!--<div class="container">-->
+<!--    <div class="product" th:each="product : ${products}">-->
 
-<div th:each="product : ${products}">
-    <p th:text="'Title: ' + ${product.getTitle()}"></p>
-    <p th:text="'Description: ' + ${product.getDescription()}"></p>
+<!--        <img class="image" th:unless="${#lists.isEmpty(product.getImage())}"-->
+<!--             th:src="@{/products/details/{title}/image (title=${product.title})}"/>-->
+<!--        <a class="title" th:text="${product.getTitle()}"></a>-->
 
-    <img style="max-width: 100px" th:unless="${#lists.isEmpty(product.getImage())}" th:src="@{/products/details/{title}/image (title=${product.title})}" />
-    <a th:href="@{/products/details/{title} (title=${product.title})}">More details</a>
+<!--        <p class="price" th:text="${product.getPrice()}"></p>-->
+<!--        <a href="#" class="adtocart">-->
+<!--        </a>-->
 
-</div>
+<!--        <div class="button-container">-->
+<!--            <a style="margin-bottom: 10px" class="button" th:text="${product.getTitle()}"></a>-->
 
+<!--            <p class="button" th:text="${product.getPrice()}"></p>-->
+<!--        </div>-->
 
-</div>
+<!--    </div>-->
+<!--</div>-->
+
+<div th:insert="fragments::footer"></div>
 </body>
+
+
 </html>
