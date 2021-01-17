@@ -15,6 +15,7 @@ import pl.osa.osaapplication.services.OrderService;
 import pl.osa.osaapplication.services.users.UserInfoService;
 
 import java.util.List;
+import java.util.Map;
 
 
 @Controller
@@ -26,12 +27,13 @@ public class CartController {
     private final OrderService orderService;
 
 
-
     @GetMapping
     public String showCartView(final ModelMap modelMap) {
+
         modelMap.addAttribute("orderLines", orderLineService.getAllOrdersByUsername());
         modelMap.addAttribute("orderForm", new OrderForm());
 
+        modelMap.addAttribute("orderSum",orderService.CalculateTotalPrice(orderLineService.getAllOrdersByUsername()));
         return "cart";
     }
 
@@ -49,8 +51,6 @@ public class CartController {
         return "order_summary";
         // return "order/" + order.getId().toString();
     }
-
-
 
 
 }

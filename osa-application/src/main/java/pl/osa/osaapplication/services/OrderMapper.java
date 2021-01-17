@@ -33,14 +33,7 @@ public class OrderMapper {
                 .address(byEmail.getAddress())
                 .shipping_address(orderForm.getShippingAddress())
                 .build();
-//        final Order order = new Order();
-//
-//        order.setUsername(userInfoService.getCurrentUser());
-//        order.setProductName(orderLineRepository.findByProduct(orderForm.getProductsName()).getProduct());
-////        Optional<OrderLine> orderLine = orderLineRepository.findById(id);
-//
-//
-//        return order;
+
     }
 
 }

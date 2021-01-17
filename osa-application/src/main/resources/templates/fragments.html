@@ -1,21 +1,92 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
-<head th:fragment="headerFragment">
+<head th:fragment="header">
 
     <meta charset="UTF-8">
-
     <title>Kamil's Online Bookstore</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-<!--    <link rel="stylesheet" href="osa-application/css/bootstrap.css">-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 
     <style>
-        #login .user-greeting{
+        #login .user-greeting {
             display: flex;
             margin-top: 13px;
             color: #9d9d9d;
+        }
+
+        .bloc_left_price {
+            color: #c01508;
+            text-align: center;
+            font-weight: bold;
+            font-size: 150%;
+        }
+
+        .category_block li:hover {
+            background-color: #007bff;
+        }
+
+        .category_block li:hover a {
+            color: #ffffff;
+        }
+
+        .category_block li a {
+            color: #343a40;
+        }
+
+        .add_to_cart_block .price {
+            color: #c01508;
+            text-align: center;
+            font-weight: bold;
+            font-size: 200%;
+            margin-bottom: 0;
+        }
+
+        .add_to_cart_block .price_discounted {
+            color: #343a40;
+            text-align: center;
+            text-decoration: line-through;
+            font-size: 140%;
+        }
+
+        .product_rassurance {
+            padding: 10px;
+            margin-top: 15px;
+            background: #ffffff;
+            border: 1px solid #6c757d;
+            color: #6c757d;
+        }
+
+        .product_rassurance .list-inline {
+            margin-bottom: 0;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        .product_rassurance .list-inline li:hover {
+            color: #343a40;
+        }
+
+        .reviews_product .fa-star {
+            color: gold;
+        }
+
+        .pagination {
+            margin-top: 20px;
+        }
+
+        footer {
+            background: #343a40;
+            padding: 40px;
+        }
+
+        footer a {
+            color: #f8f9fa !important
         }
 
     </style>
@@ -23,52 +94,154 @@
 
 <body>
 <div id="login" th:fragment="navbar">
-<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">Kamil's Online Bookstore</a>
-        </div>
-        <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li><a href="#">Page 1-1</a></li>
-                    <li><a href="#">Page 1-2</a></li>
-                    <li><a href="@{/cart}">Cart</a></li>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Kamil's Online Bookstore</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+                    aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <ul class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
+                <ul class="navbar-nav m-auto">
+                    <li class="nav-item m-auto">
+                        <a class="nav-link" th:href="@{/products}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="category.html">Categories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/products}">Product</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" th:href="@{/cart}">Cart</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
                 </ul>
-            </li>
-            <li><a th:href="@{/cart}">Cart</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
+            </ul>
 
-            <li sec:authorize="isAnonymous()"><a th:href="@{users/sign-up}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-            <li sec:authorize="isAnonymous()"><a th:href="@{/login}"><span class="glyphicon glyphicon-log-in"></span> Log In</a></li>
-            <li sec:authorize="isAuthenticated()"><a th:href="@{/user}"><span class="glyphicon glyphicon-user"></span> Hello, <span sec:authentication="name">Bob</span>!</a></li>
-            <li sec:authorize="isAuthenticated()"><a href="#" th:href="@{/logoutView}" ><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
-        </ul>
-    </div>
 
-</nav>
+            <ul class="collapse navbar-collapse justify-content-end">
+                <form class="form-inline my-2 my-lg-0">
+                    <div class="input-group input-group-sm">
+                        <input type="text" class="form-control" aria-label="Small"
+                               aria-describedby="inputGroup-sizing-sm" placeholder="Search...">
+                        <div class="input-group-append">
+                            <button type="button" class="btn btn-secondary btn-number">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!--                        <a class="btn btn-success btn-sm ml-3" href="cart.html">-->
+                    <!--                            <i class="fa fa-shopping-cart"></i> Cart-->
+                    <!--                            <span class="badge badge-light">3</span>-->
+                    <!--                        </a>-->
+                </form>
+                <form class="nav navbar-nav navbar-right">
+                    <li sec:authorize="isAnonymous()"><a class="nav-link" th:href="@{users/sign-up}"><span
+                            class="glyphicon glyphicon-user"></span> Sign Up </a></li>
+                    <li sec:authorize="isAnonymous()"><a class="nav-link" th:href="@{/login}"><span
+                            class="glyphicon glyphicon-log-in"></span> Log In</a></li>
+                    <li sec:authorize="isAuthenticated()"><a class="nav-link" th:href="@{/user}"><span
+                            class="glyphicon glyphicon-user"></span> Hello, <span
+                            sec:authentication="name">Bob</span>! </a>
+                    </li>
+
+                    <form th:action="@{/logout}" method="post">
+                        <li sec:authorize="isAuthenticated()"><a class="nav-link" th:href="@{/products}">Log out</a>
+                        </li>
+                    </form>
+                </form>
+            </ul>
+            </ul>
+
+        </div>
+    </nav>
+    <!--<nav class="navbar navbar-inverse">-->
+    <!--    <div class="container-fluid">-->
+    <!--        <div class="navbar-header">-->
+    <!--            <a class="navbar-brand" href="#">Kamil's Online Bookstore</a>-->
+    <!--        </div>-->
+    <!--        <ul class="nav navbar-nav">-->
+    <!--            <li class="active"><a href="#">Home</a></li>-->
+    <!--            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>-->
+    <!--                <ul class="dropdown-menu">-->
+    <!--                    <li><a href="#">Page 1-1</a></li>-->
+    <!--                    <li><a href="#">Page 1-2</a></li>-->
+    <!--                    <li><a href="@{/cart}">Cart</a></li>-->
+    <!--                </ul>-->
+    <!--            </li>-->
+    <!--            <li><a th:href="@{/cart}">Cart</a></li>-->
+    <!--        </ul>-->
+    <!--        <ul class="nav navbar-nav navbar-right">-->
+
+    <!--            <li sec:authorize="isAnonymous()"><a th:href="@{users/sign-up}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>-->
+    <!--            <li sec:authorize="isAnonymous()"><a th:href="@{/login}"><span class="glyphicon glyphicon-log-in"></span> Log In</a></li>-->
+    <!--            <li sec:authorize="isAuthenticated()"><a th:href="@{/user}"><span class="glyphicon glyphicon-user"></span> Hello, <span sec:authentication="name">Bob</span>!</a></li>-->
+    <!--            <li sec:authorize="isAuthenticated()"><a th:href="@{/logoutView}" ><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>-->
+    <!--        </ul>-->
+    <!--    </div>-->
+
+    <!--</nav>-->
 </div>
 
+<div th:fragment="footer">
 
-<div th:fragment="menu" >
-<div style="display: flex">
-    <form th:action="@{/products}" style="margin: 5px">
-        <input type="submit" value="Products"/>
-    </form>
-    <form th:action="@{/users}" style="margin: 5px">
-        <input type="submit" value="Users"/>
-    </form>
-    <form th:action="@{/cart}" style="margin: 5px">
-        <input type="submit" value="Cart"/>
-    </form>
+    <footer class="text-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-lg-4 col-xl-3">
+                    <h5>About</h5>
+                    <hr class="bg-white mb-2 mt-0 d-inline-block mx-auto w-25">
+                    <p class="mb-0">
+                        This is my project of an on-line store, created as a final project during Java Course with
+                        Software Development Academy.
+                    </p>
+                </div>
+
+                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto">
+                    <h5>Informations</h5>
+                    <hr class="bg-white mb-2 mt-0 d-inline-block mx-auto w-25">
+                    <ul class="list-unstyled">
+                        <li><a href="">Curriculum Vitae</a></li>
+                        <li><a href="https://www.linkedin.com/in/kamil-pieni%C4%85%C5%BCek/">LinkedIn</a></li>
+                        <li><a href="https://github.com/KamilPieniazek">GitHub Repository</a></li>
+                        <li><a href="">Link 4</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto">
+                    <h5>Others links</h5>
+                    <hr class="bg-white mb-2 mt-0 d-inline-block mx-auto w-25">
+                    <ul class="list-unstyled">
+                        <li><a href="">Link 1</a></li>
+                        <li><a href="">Link 2</a></li>
+                        <li><a href="">Link 3</a></li>
+                        <li><a href="">Link 4</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-4 col-lg-3 col-xl-3">
+                    <h5>Contact</h5>
+                    <hr class="bg-white mb-2 mt-0 d-inline-block mx-auto w-25">
+                    <ul class="list-unstyled">
+                        <li><i class="fa fa-home mr-2"></i>Kamil Pieniążek</li>
+                        <li><i class="fa fa-envelope mr-2"></i> kamilpieniazek96@gmail.com</li>
+                        <li><i class="fa fa-phone mr-2"></i> + 48 515 332 951</li>
+                    </ul>
+                </div>
+                <div class="col-12 copyright mt-3">
+                    <p class="float-left">
+                        <a href="#">Back to top</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
 </div>
-    <form th:action="@{/logout}" method="POST" style="float: right">
-        <input type="submit" value="Logout"/>
-    </form>
-
-</div>
-
 </body>
 </html>

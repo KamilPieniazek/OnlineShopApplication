@@ -28,6 +28,7 @@ public class OrderLineMapper {
         orderLine.setPrice(product.get().getPrice());
         orderLine.setQuantity(orderLineForm.getQuantity());
         orderLine.setUsername(userInfoService.getCurrentUser());
+
         return orderLine;
     }
 }
