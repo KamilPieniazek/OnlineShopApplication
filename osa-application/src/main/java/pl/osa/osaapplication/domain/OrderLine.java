@@ -3,6 +3,7 @@ package pl.osa.osaapplication.domain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
 
@@ -21,7 +22,7 @@ public class OrderLine {
     @Column(name = "product")
     private String product;
 
-    @Column(name = "quantity")
+    @Column(name = "quantity") 
     private Long quantity;
 
     @Column(name = "price")

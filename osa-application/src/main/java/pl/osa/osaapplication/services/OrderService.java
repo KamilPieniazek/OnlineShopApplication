@@ -5,9 +5,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.osa.osaapplication.domain.Order;
 import pl.osa.osaapplication.domain.OrderLine;
+import pl.osa.osaapplication.domain.User;
+import pl.osa.osaapplication.model.OrderStatus;
 import pl.osa.osaapplication.repositories.OrderLineRepository;
 import pl.osa.osaapplication.repositories.OrderRepository;
 import pl.osa.osaapplication.repositories.ProductRepository;
+import pl.osa.osaapplication.repositories.UserRepository;
 import pl.osa.osaapplication.services.users.UserInfoService;
 
 import java.util.List;
@@ -20,13 +23,18 @@ public class OrderService {
     private final OrderLineRepository orderLineRepository;
     private final ProductService productService;
     private final OrderRepository orderRepository;
+    private final UserRepository userRepository;
+
 
     public Order submitOrder() throws Exception{
         String currentUser = userInfoService.getCurrentUser();
         List<OrderLine> cartLines = orderLineRepository.findByUsernameAndOrderIsNull(currentUser);
+        User userInfo=userRepository.findByEmail(userInfoService.getCurrentUser());
 
         Order order = new Order();
         order.setUsername(currentUser);
+        order.setStatus(OrderStatus.PLACED);
+        order.setShipping_address(userInfo.getAddress()+" "+userInfo.getCity());
         order.setTotalPrice(CalculateTotalPrice(cartLines));
         orderRepository.save(order);
 

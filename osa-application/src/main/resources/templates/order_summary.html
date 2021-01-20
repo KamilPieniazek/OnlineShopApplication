@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <div th:replace="fragments::header"></div>
     <meta charset="UTF-8">
     <title>Thank you!</title>
 
@@ -10,11 +11,13 @@
     </style>
 </head>
 <body>
-
-<p>Thank you for purchasing our products! </p>
+<div th:insert="fragments::navbar"></div>
+<p>Thank you for purchasing our products!</p>
+<p>Check your mail inbox to see your order summary!</p>
 
 <form th:action="@{/products}" style="margin: 5px">
     <input type="submit" value="Go back to products page"/>
 </form>
+<div th:insert="fragments::footer"></div>
 </body>
 </html>

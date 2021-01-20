@@ -32,9 +32,19 @@ public class OrderLineService {
         return orderLineRepository.findByUsername(userInfoService.getCurrentUser());
     }
 
-    public void  deleteallOrderLines(){
+    public void deleteallOrderLines() {
         orderLineRepository.deleteAll();
     }
 
+    public String toString() {
+        StringBuilder order = new StringBuilder();
 
+        for (int i = 0; i < getAllOrdersByUsername().size(); i++) {
+            order.append("Product name: " + getAllOrdersByUsername().get(i).getProduct() + "\n" +
+                    "Product price: " + getAllOrdersByUsername().get(i).getPrice());
+
+        }
+        return "\n" + order.toString();
+
+    }
 }
