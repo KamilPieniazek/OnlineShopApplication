@@ -6,6 +6,7 @@ import pl.osa.osaapplication.domain.Order;
 import pl.osa.osaapplication.domain.OrderLine;
 import pl.osa.osaapplication.domain.User;
 import pl.osa.osaapplication.model.OrderForm;
+import pl.osa.osaapplication.model.OrderStatus;
 import pl.osa.osaapplication.model.ProductForm;
 import pl.osa.osaapplication.repositories.OrderLineRepository;
 import pl.osa.osaapplication.repositories.UserRepository;
@@ -32,6 +33,7 @@ public class OrderMapper {
                 .username(currentUser)
                 .address(byEmail.getAddress())
                 .shipping_address(orderForm.getShippingAddress())
+                .status(OrderStatus.PLACED)
                 .build();
 
     }

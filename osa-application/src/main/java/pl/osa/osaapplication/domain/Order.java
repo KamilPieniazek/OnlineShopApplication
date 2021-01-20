@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pl.osa.osaapplication.model.OrderStatus;
 
 import javax.persistence.*;
 import java.util.List;
@@ -27,6 +28,9 @@ public class Order {
     private String address;
 
     private String shipping_address;
+
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status;
 
 
 }

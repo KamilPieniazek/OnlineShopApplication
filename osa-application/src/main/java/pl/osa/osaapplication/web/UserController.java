@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.osa.osaapplication.domain.User;
 import pl.osa.osaapplication.model.Role;
 import pl.osa.osaapplication.model.UserForm;
+import pl.osa.osaapplication.services.EmailService;
 import pl.osa.osaapplication.services.users.UserInfoService;
 import pl.osa.osaapplication.services.users.UserService;
 import pl.osa.osaapplication.services.validation.UserValidator;
@@ -24,6 +25,7 @@ public class UserController {
     private final UserService userService;
     private final UserValidator userValidator;
     private final UserInfoService userInfoService;
+    private final EmailService emailService;
 
     @GetMapping
     public String showUsersView(final ModelMap modelMap) {
@@ -52,7 +54,7 @@ public class UserController {
             return "/users";
         }
         userService.createUser(userForm);
-
+        emailService.sendNewAccountConfirmation(userForm);
         return "redirect:/users";
     }
 }

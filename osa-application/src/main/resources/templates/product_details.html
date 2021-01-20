@@ -62,8 +62,9 @@
             <div class="card bg-light mb-3">
                 <div class="card-body">
                     <a href="" data-toggle="modal" data-target="#productModal">
-                        <img class="img-fluid" src="https://dummyimage.com/800x800/55595c/fff" />
-
+<!--                        <img class="img-fluid" src="https://dummyimage.com/800x800/55595c/fff" />-->
+                        <img class="img-fluid" src="https://dummyimage.com/600x400/55595c/fff"  style="max-height: 40vh" th:unless="${#lists.isEmpty(product_details.getImage())}"
+                             th:src="@{/products/details/{title}/image (title=${product_details.title})}" alt="Card image cap"/>
                     </a>
                 </div>
             </div>
@@ -74,7 +75,7 @@
             <div class="card bg-light mb-3">
                 <div class="card-body">
                     <p class="title" th:text="${product_details.getTitle()}"></p>
-                    <p class="price"  th:text="${product_details.getPrice()}"></p>
+                    <p class="price"  th:text="${product_details.getPrice()}+ ' PLN'"></p>
                     <form  th:action="@{/products/details/{title}/addToChart (title=${product_details.title})}" method="post" th:object="${orderLineForm}">
 
                             <div class="form-group">
@@ -85,7 +86,7 @@
                                         <i class="fa fa-minus"></i>
                                     </button>
                                 </div>
-                                <input type="number" th:field="*{quantity}" class="form-control"  id="quantity" name="quantity" min="1" max="100" value="1">
+                                <input class="form-control"  id="quantity" name="quantity" min="1" max="100" value="1">
                                 <div class="input-group-append">
                                     <button type="button" class="quantity-right-plus btn btn-success btn-number" data-type="plus" data-field="">
                                         <i class="fa fa-plus"></i>
@@ -177,17 +178,17 @@
 <!--    <input type="submit">-->
 
 <!--</form>-->
-<button onclick="increment()">+</button>
-<button onclick="decrement()">-</button>
-<script>
-    function increment(){
-        document.getElementById('quantity').stepUp();
+<!--<button onclick="increment()">+</button>-->
+<!--<button onclick="decrement()">-</button>-->
+<!--<script>-->
+<!--    function increment(){-->
+<!--        document.getElementById('quantity').stepUp();-->
 
-    }
-    function decrement(){
-        document.getElementById('quantity').stepDown();
-    }
-</script>
+<!--    }-->
+<!--    function decrement(){-->
+<!--        document.getElementById('quantity').stepDown();-->
+<!--    }-->
+<!--</script>-->
 <div th:insert="fragments::footer"></div>
 
 </body>

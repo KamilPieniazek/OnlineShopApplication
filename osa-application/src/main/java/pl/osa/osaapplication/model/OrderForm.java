@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -17,6 +20,9 @@ public class OrderForm {
     private String productsName;
 
     private String shippingAddress;
+
+    @Enumerated(EnumType.STRING)
+    private OrderStatus orderStatus;
 
 
 }
