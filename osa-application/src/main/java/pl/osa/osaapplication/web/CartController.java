@@ -25,7 +25,7 @@ public class CartController {
     public String showCartView(final ModelMap modelMap) {
 
         modelMap.addAttribute("orderLines", orderLineService.getAllOrdersByUsername());
-        modelMap.addAttribute("orderForm", new OrderForm());
+       // modelMap.addAttribute("orderForm", new OrderForm());
         modelMap.addAttribute("orderSum", orderService.CalculateTotalPrice(orderLineService.getAllOrdersByUsername()));
 
         return "cart";

@@ -3,6 +3,7 @@ package pl.osa.osaapplication.web;
 import lombok.RequiredArgsConstructor;
 //import org.springframework.security.access.annotation.Secured;
 import org.apache.commons.io.IOUtils;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -37,12 +38,15 @@ public class ProductController {
 
     private final UserService userService;
 
-    @GetMapping
-    public String showProductsView(final ModelMap modelMap) {
-        modelMap.addAttribute("products", productService.getAllProducts());
+    @GetMapping()
+    public String showProductsView(final ModelMap modelMap, @Param("keyword") String keyword) {
+
+        List<Product> searchList = productService.search(keyword);
+
+        modelMap.addAttribute("keyword", keyword);
+        modelMap.addAttribute("products", searchList);
         modelMap.addAttribute("productForm", new ProductForm());
         modelMap.addAttribute("authors", authorRepository.findAll());
-
 
         return "products";
     }
@@ -56,8 +60,8 @@ public class ProductController {
     @Secured("ADMIN")
     @RequestMapping(value = "/addProduct", method = {RequestMethod.GET, RequestMethod.POST})
     public String addProduct(
-              @ModelAttribute(name = "productForm") final ProductForm productForm,
-                             final Errors errors) throws IOException {
+            @ModelAttribute(name = "productForm") final ProductForm productForm,
+            final Errors errors) throws IOException {
 
         if (errors.hasErrors()) {
             return "products";
@@ -65,7 +69,6 @@ public class ProductController {
         productService.addProduct(productForm);
         return "redirect:/products";
     }
-
 
 
     //@GetMapping(value = "/details/{title}")
@@ -81,9 +84,9 @@ public class ProductController {
     @GetMapping(value = "/details/{title}/image")
     public void getProductImage(@PathVariable final String title, HttpServletResponse response) throws IOException {
         response.setContentType("image/jpeg");
-        Product product=productService.getProductById(title);
-        InputStream inputStream=new ByteArrayInputStream(product.getImage());
-        IOUtils.copy(inputStream,response.getOutputStream());
+        Product product = productService.getProductById(title);
+        InputStream inputStream = new ByteArrayInputStream(product.getImage());
+        IOUtils.copy(inputStream, response.getOutputStream());
     }
 
     // TODO: przeniesc do cartController

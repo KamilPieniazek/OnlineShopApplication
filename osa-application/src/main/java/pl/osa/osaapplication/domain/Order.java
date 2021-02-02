@@ -20,7 +20,6 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-
     private double totalPrice;
 
     private String username;
@@ -28,6 +27,7 @@ public class Order {
     private String address;
 
     private String shipping_address;
+
 
     @Enumerated(EnumType.STRING)
     private OrderStatus status;

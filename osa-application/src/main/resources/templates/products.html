@@ -6,14 +6,14 @@
 
 <head>
     <div th:replace="fragments::header"></div>
-<!--    <meta charset="utf-8">-->
-<!--    <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
-<!--    <title>Kamil's Online Bookstore</title>-->
-<!--    &lt;!&ndash;    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"/>&ndash;&gt;-->
-<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
-<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
-<!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
+    <!--    <meta charset="utf-8">-->
+    <!--    <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+    <!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
+    <!--    <title>Kamil's Online Bookstore</title>-->
+    <!--    &lt;!&ndash;    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"/>&ndash;&gt;-->
+    <!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
+    <!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+    <!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
 
     <script> function addProduct() {
         let popupProduct = document.querySelector('.addProduct');
@@ -36,15 +36,35 @@
 <!--<div th:fragment="fragment" th:remove="tag"></div>-->
 <div th:insert="fragments::navbar"></div>
 
-<div class="col" >
-    <div class="row" >
-        <div class="col-12 col-md-6 col-lg-4"  th:each="product : ${products}">
-            <div class="card" >
-                <img class="card-img-top" src="https://dummyimage.com/600x400/55595c/fff"  style="max-height: 40vh" th:unless="${#lists.isEmpty(product.getImage())}"
+<!--<form class="nav navbar-nav navbar-right">-->
+<!--    <li sec:authorize="isAnonymous()"><a class="nav-link" th:href="@{users/sign-up}"><span-->
+<!--            class="glyphicon glyphicon-user"></span> Sign Up </a></li>-->
+<!--    <li sec:authorize="isAnonymous()"><a class="nav-link" th:href="@{/login}"><span-->
+<!--            class="glyphicon glyphicon-log-in"></span> Log In</a></li>-->
+<!--    <li sec:authorize="isAuthenticated()"><a class="nav-link" th:href="@{/user}"><span-->
+<!--            class="glyphicon glyphicon-user"></span> Hello, <span-->
+<!--            sec:authentication="name">Bob</span>! </a>-->
+<!--    </li>-->
+
+<!--    <form th:action="@{/logout}" method="post">-->
+<!--        <li sec:authorize="isAuthenticated()"><a class="nav-link" th:href="@{/products}">Log out</a>-->
+<!--        </li>-->
+<!--    </form>-->
+<!--</form>-->
+</ul>
+<div class="col">
+    <div class="row">
+
+        <div class="col-12 col-md-6 col-lg-4" th:each="product : ${products}">
+
+            <div class="card">
+                <img class="card-img-top" src="https://dummyimage.com/600x400/55595c/fff" style="max-height: 40vh"
+                     th:unless="${#lists.isEmpty(product.getImage())}"
                      th:src="@{/products/details/{title}/image (title=${product.title})}" alt="Card image cap"/>
                 <div class="card-body">
-                    <h4 class="card-title">  <a th:href="@{/products/details/{title} (title=${product.title})}" title="View Product"
-                                                 th:text="${product.getTitle()}"></a></h4>
+                    <h4 class="card-title"><a th:href="@{/products/details/{title} (title=${product.title})}"
+                                              title="View Product"
+                                              th:text="${product.getTitle()}"></a></h4>
                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
                         card's content.</p>
                     <div class="col">
@@ -62,7 +82,9 @@
 </div>
 
 <div sec:authorize="hasRole('ROLE_ADMIN')">
-    <button   onClick=addProduct()>Add product</button></div>
+    <button onClick=addProduct()>Add product</button>
+</div>
+
 <div class="addProduct">
     <form th:action="@{/products/addProduct}" method="POST" enctype="multipart/form-data" th:object="${productForm}">
         <hi>Sign up</hi>

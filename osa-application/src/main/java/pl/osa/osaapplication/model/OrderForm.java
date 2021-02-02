@@ -15,6 +15,8 @@ import javax.persistence.Enumerated;
 @Builder
 public class OrderForm {
 
+    private Long id;
+
     private String username;
 
     private String productsName;
