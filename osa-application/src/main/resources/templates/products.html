@@ -65,8 +65,7 @@
                     <h4 class="card-title"><a th:href="@{/products/details/{title} (title=${product.title})}"
                                               title="View Product"
                                               th:text="${product.getTitle()}"></a></h4>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
+                    <p class="card-text" th:text="${product.getDescription()}"></p>
                     <div class="col">
                         <div class="col">
                             <p class="btn btn-danger btn-block" th:text="${product.getPrice()}"></p>
