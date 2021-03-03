@@ -27,7 +27,6 @@ public class Product {
 
 
     @Column(name = "image")
-
     @Lob
     private byte[] image;
 

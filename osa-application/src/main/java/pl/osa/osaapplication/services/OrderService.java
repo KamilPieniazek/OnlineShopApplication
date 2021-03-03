@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import pl.osa.osaapplication.domain.Order;
 import pl.osa.osaapplication.domain.OrderLine;
 import pl.osa.osaapplication.domain.User;
+import pl.osa.osaapplication.model.OrderForm;
 import pl.osa.osaapplication.model.OrderStatus;
 import pl.osa.osaapplication.repositories.OrderLineRepository;
 import pl.osa.osaapplication.repositories.OrderRepository;
@@ -26,15 +27,15 @@ public class OrderService {
     private final UserRepository userRepository;
 
 
-    public Order submitOrder() throws Exception{
+    public Order submitOrder() throws Exception {
         String currentUser = userInfoService.getCurrentUser();
         List<OrderLine> cartLines = orderLineRepository.findByUsernameAndOrderIsNull(currentUser);
-        User userInfo=userRepository.findByEmail(userInfoService.getCurrentUser());
+        User userInfo = userRepository.findByEmail(userInfoService.getCurrentUser());
 
         Order order = new Order();
         order.setUsername(currentUser);
         order.setStatus(OrderStatus.PLACED);
-        order.setShipping_address(userInfo.getAddress()+" "+userInfo.getCity());
+        order.setShipping_address(userInfo.getAddress() + " " + userInfo.getCity());
         order.setTotalPrice(CalculateTotalPrice(cartLines));
         orderRepository.save(order);
 
@@ -53,5 +54,10 @@ public class OrderService {
                 .reduce(0.0, (acc, curr) -> acc + curr);
     }
 
+    public void changeOrderStatus(final OrderForm orderForm, final Long id) {
+        final Order order = orderRepository.getOne(id);
+        order.setStatus(orderForm.getOrderStatus());
 
+        orderRepository.save(order);
+    }
 }

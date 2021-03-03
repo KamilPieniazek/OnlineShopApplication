@@ -3,11 +3,8 @@ package pl.osa.osaapplication.services;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 import pl.osa.osaapplication.domain.Product;
-import pl.osa.osaapplication.domain.User;
 import pl.osa.osaapplication.model.ProductForm;
-import pl.osa.osaapplication.model.UserForm;
 import pl.osa.osaapplication.repositories.AuthorRepository;
 import pl.osa.osaapplication.repositories.ProductRepository;
 
@@ -44,6 +41,12 @@ public class ProductService {
                 .orElseThrow();
     }
 
+    public List<Product> search(String keyword) {
+        if (keyword != null) {
+            return productRepository.searchByTitleKeyword(keyword);
+        }
+        return getAllProducts();
+    }
 
     public void updateProduct(final ProductForm productForm, final String id) {
         final Product existingProduct = getProductById(id);

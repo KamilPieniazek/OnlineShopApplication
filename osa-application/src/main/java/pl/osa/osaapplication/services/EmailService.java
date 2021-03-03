@@ -6,7 +6,6 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.osa.osaapplication.domain.User;
 import pl.osa.osaapplication.model.UserForm;
 import pl.osa.osaapplication.services.users.UserInfoService;
 
@@ -15,12 +14,9 @@ import pl.osa.osaapplication.services.users.UserInfoService;
 @Transactional
 public class EmailService {
 
-
     private JavaMailSender javaMailSender;
     private final UserInfoService userInfoService;
     private final OrderLineService orderLineService;
-
-
 
     @Autowired
     public EmailService(JavaMailSender javaMailSender, UserInfoService userInfoService, OrderLineService orderLineService) {
@@ -46,7 +42,7 @@ public class EmailService {
         mailMessage.setTo(userForm.getEmail());
         mailMessage.setSubject("Welcome to Kamil's Online Bookstore!");
         mailMessage.setText("Hello "+userForm.getEmail()+" ! "+"\n"+
-                "Thank you for creating new account on out on-line store. You can now log in!");
+                "Thank you for creating new account on our on-line store. You can now log in!");
 
         javaMailSender.send(mailMessage);
     }

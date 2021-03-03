@@ -5,6 +5,89 @@
     <title>Title</title>
 </head>
 <body>
+<div>
+    <div th:replace="fragments::header"></div>
+    <div th:insert="fragments::navbar"></div>
 
+
+    <div class="container mb-4">
+        <div class="row">
+            <div class="col-12">
+                <div th:each="order:${orders}" class="table-responsive">
+                    <form th:action="@{/administration_panel/{id}/update (id=${order.getId()})}" method="post">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th scope="col">Order ID</th>
+                                <th scope="col">Username</th>
+                                <th scope="col">Order Status</th>
+                                <th scope="col" class="text-center">Quantity</th>
+                                <th scope="col" class="text-right">Price</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td th:text="${order.id}"></td>
+                                <td th:text="${order.status}"></td>
+                                <td th:text="${order.username}"></td>
+
+                                <td th:action="${order.status}">
+                                    <!--                                <div th:object="${order_details}">-->
+
+                                    <select id="orderStatus" name="orderStatus" required="" th:type="text">
+                                        <option th:each="status:${T(pl.osa.osaapplication.model.OrderStatus).values()}"
+                                                th:value="${status.name()}"
+                                                th:text="${status.name()}"></option>
+
+                                        <input type="submit">
+                                    </select>
+                                    <!--                                </div>-->
+                                </td>
+                                <td>
+
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </form>
+
+<!--                    <div class="updateProduct">-->
+<!--                        <form th:action="@{/administration_panel/{id}/update (id=${order.id})}" method="post" th:object="${order}">-->
+<!--                            <h1>Update product</h1>-->
+
+<!--                            <fieldset>-->
+<!--                                <label>Id: </label>-->
+<!--                                <p th:text="*{id}"></p>-->
+<!--                                <input id="title" type="text" th:field="*{id}">-->
+<!--                                <p th:if="${#fields.hasErrors('id')}"-->
+<!--                                   th:text="${#fields.errors('id')}"></p>-->
+
+
+
+<!--                                <label for="type">Pick type :</label>-->
+<!--                                <select id="type" name="productType" >-->
+<!--                                    <option value="">Select type</option>-->
+<!--                                    <option th:each="type:${T(pl.osa.osaapplication.model.OrderStatus).values()}"-->
+<!--                                            th:value="${type.name()}"-->
+<!--                                            th:text="${type.name()}"></option>-->
+<!--                                </select>-->
+<!--                                <button type="submit">Update product</button>-->
+<!--                            </fieldset>-->
+<!--                        </form>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--
+-->
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div th:insert="fragments::footer"></div>
+
+</div>
 </body>
 </html>
