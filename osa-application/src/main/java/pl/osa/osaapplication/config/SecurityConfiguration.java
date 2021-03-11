@@ -37,7 +37,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
               // .antMatchers(HttpMethod.GET, "/products").hasAuthority("USER")
                 .antMatchers("/h2/**").permitAll()
                 .antMatchers("/products/**").permitAll()
+
                 .anyRequest().authenticated()
+                .and()
+                .oauth2Login().loginPage("/login").defaultSuccessUrl("/products",true)
                 .and()
                 .csrf().ignoringAntMatchers("/h2/**")
                 .and()

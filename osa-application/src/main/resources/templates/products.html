@@ -65,14 +65,15 @@
                     <h4 class="card-title"><a th:href="@{/products/details/{title} (title=${product.title})}"
                                               title="View Product"
                                               th:text="${product.getTitle()}"></a></h4>
+                    <h6 class="card-text" th:text="${product.getAuthor().getName()}"></h6>
                     <p class="card-text" th:text="${product.getDescription()}"></p>
                     <div class="col">
                         <div class="col">
-                            <p class="btn btn-danger btn-block" th:text="${product.getPrice()}"></p>
+                            <p class="btn btn-danger btn-block" th:text="${product.getPrice()}"> PLN</p>
                         </div>
-                        <div class="col">
-                            <a href="#" class="btn btn-success btn-block">Add to cart</a>
-                        </div>
+<!--                     <div class="col">-->
+<!--                            <a href="#" class="btn btn-success btn-block">Add to cart</a>-->
+<!--                        </div>-->
                     </div>
                 </div>
             </div>
