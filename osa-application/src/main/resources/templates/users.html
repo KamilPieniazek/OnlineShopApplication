@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
+        <div th:replace="fragments::header"></div>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -137,7 +138,7 @@
 <body>
 
 
-
+<div th:insert="fragments::navbar"></div>
 <div id="logreg-forms" >
     <form class="form-signin" th:action="@{/users/sign-up}" th:object="${userForm}" method="post">
         <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Create an account</h1>
