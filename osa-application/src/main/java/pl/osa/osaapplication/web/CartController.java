@@ -11,6 +11,8 @@ import pl.osa.osaapplication.services.OrderLineService;
 
 import pl.osa.osaapplication.services.OrderService;
 
+import javax.naming.directory.InvalidAttributesException;
+
 
 @Controller
 @RequestMapping("/cart")
@@ -39,7 +41,12 @@ public class CartController {
         try {
             order = orderService.submitOrder();
             emailService.sendOrderConfirmationEmail();
-        } catch (Exception e) {
+        }
+        // TODO: change this exception maybe
+        catch (InvalidAttributesException e) {
+
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
         orderLineService.deleteallOrderLines();

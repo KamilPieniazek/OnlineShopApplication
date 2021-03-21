@@ -51,9 +51,11 @@ public class UserForm {
             return false;
         }
         return !password.toLowerCase().equals(password) &&
-                password.chars().anyMatch(ch -> Character.isDigit(ch)) &&
-                password.chars().anyMatch(ch -> Character.isAlphabetic(ch));
+                password.chars().anyMatch(Character::isDigit) &&
+                password.chars().anyMatch(Character::isAlphabetic);
     }
+
+    private boolean shouldProceedWithCart = true;
 
 
 }

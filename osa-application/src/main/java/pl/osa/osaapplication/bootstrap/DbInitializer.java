@@ -23,6 +23,7 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 @Transactional
+
 public class DbInitializer implements CommandLineRunner {
     @Value("test@test.com")
     private String email;
@@ -43,9 +44,10 @@ public class DbInitializer implements CommandLineRunner {
                 "Gdansk",
                 "Dragana",
                 "mail",
+                null,
                 Role.ROLE_ADMIN));
 
-        userRepository.save(new User("Pamil@o2.pl", kamilpie12, "Gdansk", "Dragana", "mail",
+        userRepository.save(new User("Pamil@o2.pl", kamilpie12, "Gdansk", "Dragana", "mail", null,
                 Role.ROLE_USER));
 
 
