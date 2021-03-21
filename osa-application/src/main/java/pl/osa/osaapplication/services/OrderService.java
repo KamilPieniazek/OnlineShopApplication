@@ -30,12 +30,11 @@ public class OrderService {
     public Order submitOrder() throws Exception {
         String currentUser = userInfoService.getCurrentUser();
         List<OrderLine> cartLines = orderLineRepository.findByUsernameAndOrderIsNull(currentUser);
-        User userInfo = userRepository.findByEmail(userInfoService.getCurrentUser());
-
+        User userInfo = userRepository.findByEmail(currentUser);
         Order order = new Order();
         order.setUsername(currentUser);
         order.setStatus(OrderStatus.PLACED);
-        order.setShipping_address(userInfo.getAddress() + " " + userInfo.getCity());
+//        order.setShipping_address(userInfo.getAddress() + " " + userInfo.getCity());
         order.setTotalPrice(CalculateTotalPrice(cartLines));
         orderRepository.save(order);
 

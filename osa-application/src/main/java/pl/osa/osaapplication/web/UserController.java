@@ -57,4 +57,16 @@ public class UserController {
         emailService.sendNewAccountConfirmation(userForm);
         return "redirect:/users";
     }
+
+    @RequestMapping(value = "/update")
+    @PostMapping
+    public String updateUser(@Valid @ModelAttribute(name = "userForm") final UserForm userForm){
+        userService.updateUser(userForm);
+
+        if (userForm.isShouldProceedWithCart()) {
+            return "redirect:/cart";
+        } else {
+            return "redirect:/user-profile";
+        }
+    }
 }

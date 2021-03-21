@@ -5,7 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pl.osa.osaapplication.model.AuthenticationProvider;
 import pl.osa.osaapplication.model.Role;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
@@ -42,6 +44,9 @@ public class User {
     @Column(name = "preferredWayOdComunication")
     private String preferredWayOfComunication;
 
+    @Column(name = "auth_provider")
+    @Enumerated(EnumType.STRING)
+    private AuthenticationProvider auth_provider;
 
     @NotNull
     @Column(name = "role")
@@ -73,4 +78,7 @@ public class User {
 //    @JoinColumn(name = "role_id",referencedColumnName = "name")
 //    private String role;
 
+    public boolean hasAddressDefined() {
+        return !this.getAddress().equals("default");
+    }
 }

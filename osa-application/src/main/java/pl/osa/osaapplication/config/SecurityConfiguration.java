@@ -1,6 +1,7 @@
 package pl.osa.osaapplication.config;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -9,11 +10,14 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.core.GrantedAuthorityDefaults;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.oauth2.core.user.OAuth2User;
+import pl.osa.osaapplication.services.users.CustomOAuth2UserService;
 import pl.osa.osaapplication.services.users.CustomUserDetailsService;
+import pl.osa.osaapplication.services.users.OAuth2LoginSuccessHandler;
 
 
-@EnableWebSecurity
 @Configuration
+@EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
@@ -22,8 +26,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .formLogin()
-                .loginPage("/login").permitAll()
+                .formLogin().permitAll()
+                    .loginPage("/login")
+                .defaultSuccessUrl("/products", true)
+                .and()
+                .oauth2Login()
+                    .loginPage("/login")
+                    .userInfoEndpoint()
+                        .userService(oAuth2UserService)
+                    .and()
+                    .successHandler(oAuth2LoginSuccessHandler)
                 .defaultSuccessUrl("/products", true)
                 // .failureUrl("/users")
                 .and()
@@ -34,28 +46,30 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/users/sign-up/**").permitAll()
                 .antMatchers("/administration_panel/**").permitAll()
-              // .antMatchers(HttpMethod.GET, "/products").hasAuthority("USER")
+//                .antMatchers(HttpMethod.GET, "/products").hasAuthority("USER")
                 .antMatchers("/h2/**").permitAll()
                 .antMatchers("/products/**").permitAll()
-
+                .antMatchers("/oauth2/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .oauth2Login().loginPage("/login").defaultSuccessUrl("/products",true)
-                .and()
+
                 .csrf().ignoringAntMatchers("/h2/**")
                 .and()
                 .headers().frameOptions().disable();
 
         http.headers().frameOptions().disable();
     }
+
     @Override
     protected UserDetailsService userDetailsService() {
         return customUserDetailsService;
     }
 
-//    @Bean
-//    GrantedAuthorityDefaults grantedAuthorityDefaults(){
-//        return new GrantedAuthorityDefaults("");
-//    }
+
+    @Autowired
+    private CustomOAuth2UserService oAuth2UserService;
+
+    @Autowired
+    private OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler;
 }
 
