@@ -16,8 +16,12 @@ import pl.osa.osaapplication.repositories.*;
 
 
 import javax.imageio.ImageIO;
+import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 
 @Component
@@ -37,25 +41,38 @@ public class DbInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
+//        EntityManager entityManager= Persistence.createEntityManagerFactory("DbInitializer").createEntityManager();
+//
+//        entityManager.getTransaction().begin();
+
 
         String kamilpie12 = passwordEncoder.encode("Kamilpie12");
-        userRepository.save(new User("Kamil@o2.pl",
+
+        User u1 = new User(1L, "Kamil@o2.pl",
                 kamilpie12,
                 "Gdansk",
                 "Dragana",
                 "mail",
                 null,
-                Role.ROLE_ADMIN));
+                Role.ROLE_ADMIN,
+                Collections.emptySet());
+//        Address a1 = new Address(null, "a", "s", "d", "", "s",u1);
+//        u1.getAddresses().add(a1);
 
-        userRepository.save(new User("Pamil@o2.pl", kamilpie12, "Gdansk", "Dragana", "mail", null,
-                Role.ROLE_USER));
+//        entityManager.persist(u1);
+//        entityManager.persist(a1);
+//        entityManager.getTransaction().commit();
+//        entityManager.close();
+
+        userRepository.save(new User(2L, "Pamil@o2.pl", kamilpie12, "Gdansk", "Dragana", "mail", null,
+                Role.ROLE_USER,
+                Collections.emptySet()));
 
 
         authorRepository.save(new Author("Kamil Jastrzembowski", List.of()));
         Author kamil_pieniążek = authorRepository.save(new Author("Kamil Pieniążek", List.of()));
         Author remigiusz_mroz = authorRepository.save(new Author("Remigiusz Mróz", List.of()));
         Stock stock = stockRepository.save(new Stock());
-
 
         productRepository.save(
                 new Product("Kasacja. Joanna Chyłka. Tom 1",

@@ -29,7 +29,7 @@ public class EmailService {
 
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setFrom("hieronimDTest@gmail.com");
-        mailMessage.setTo(userInfoService.getCurrentUser());
+        mailMessage.setTo(userInfoService.getCurrentUser().get().getEmail());
         mailMessage.setSubject("Order Confirmation");
         mailMessage.setText("Thank you for purchasing our products!"+ orderLineService.toString());
 

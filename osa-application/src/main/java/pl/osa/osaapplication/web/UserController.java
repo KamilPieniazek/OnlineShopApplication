@@ -15,6 +15,7 @@ import pl.osa.osaapplication.services.validation.UserValidator;
 
 import javax.validation.Valid;
 import java.util.Map;
+import java.util.Optional;
 
 
 @RequiredArgsConstructor
@@ -29,10 +30,14 @@ public class UserController {
 
     @GetMapping
     public String showUsersView(final ModelMap modelMap) {
-        String currentUser = userInfoService.getCurrentUser();
-        User byId = userService.getById(currentUser);
+        Optional<User> currentUser = userInfoService.getCurrentUser();
+
+        if (currentUser.isEmpty()) {
+            return "/redirect:/logout";
+        }
+
         modelMap.addAttribute("userForm", new UserForm());
-        modelMap.addAttribute("u", currentUser);
+      //  modelMap.addAttribute("u", currentUser);
         modelMap.addAllAttributes(Map.of(
                 "users", userService.getAllUsers(),
                 "roles", Role.allTypes()));
@@ -60,7 +65,7 @@ public class UserController {
 
     @RequestMapping(value = "/update")
     @PostMapping
-    public String updateUser(@Valid @ModelAttribute(name = "userForm") final UserForm userForm){
+    public String updateUser(@Valid @ModelAttribute(name = "userForm") final UserForm userForm) {
         userService.updateUser(userForm);
 
         if (userForm.isShouldProceedWithCart()) {

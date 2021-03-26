@@ -11,13 +11,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, String> {
+public interface UserRepository extends JpaRepository<User, Long> {
     List<User> findAllByEmail(String email);
 
-    User findByEmail(String email);
-
-
-        }
-
-
-
+    Optional<User> findByEmail(String email);
+}

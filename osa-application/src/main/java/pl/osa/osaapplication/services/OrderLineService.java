@@ -29,7 +29,7 @@ public class OrderLineService {
 
 
     public List<OrderLine> getAllOrdersByUsername() {
-        return orderLineRepository.findByUsername(userInfoService.getCurrentUser());
+        return orderLineRepository.findByUsername(userInfoService.getCurrentUser().get().getEmail());
     }
 
     public void deleteallOrderLines() {
