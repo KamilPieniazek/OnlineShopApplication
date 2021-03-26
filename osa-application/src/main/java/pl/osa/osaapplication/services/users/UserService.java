@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.osa.osaapplication.domain.User;
 import pl.osa.osaapplication.model.AuthenticationProvider;
-import pl.osa.osaapplication.model.Role;
 import pl.osa.osaapplication.model.UserForm;
 import pl.osa.osaapplication.repositories.UserRepository;
 
@@ -36,14 +35,14 @@ public class UserService {
     }
 
 
-    public User getById(String email) {
-        return userRepository.findById(email)
-                .orElseThrow(() -> new RuntimeException(String.format("User with id %s does not exist", email)));
+    public User getById(Long id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException(String.format("User with id %s does not exist", id)));
     }
 
 
-    public Optional<User> findById(String email) {
-        return userRepository.findById(email);
+    public Optional<User> findById(Long id) {
+        return userRepository.findById(id);
     }
 
 
@@ -57,5 +56,9 @@ public class UserService {
 
         //TODO: Object user (current user), save change from userform to user
 
+    }
+
+    public Optional<User> getByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 }

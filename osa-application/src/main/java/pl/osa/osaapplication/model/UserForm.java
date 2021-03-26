@@ -33,16 +33,20 @@ public class UserForm {
     private String password;
 
     @NotEmpty(message = "This form can not be blank!")
-    private String city;
-
-    @NotEmpty(message = "This form can not be blank!")
     private String address;
 
     @NotEmpty(message = "Please pick an option")
     private String preferredWayOfComunication;
 
-//    @Column(name = "name", columnDefinition = "varchar(255) default 'USER'")
-//    private Role role;
+    private String street;
+
+    private String building_number;
+
+    private String flat_number;
+
+    private String postal_code;
+
+    private String city;
 
     @AssertTrue
     public boolean isPasswordValid() {

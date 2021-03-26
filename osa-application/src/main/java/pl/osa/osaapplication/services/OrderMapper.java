@@ -20,18 +20,16 @@ import java.util.Optional;
 public class OrderMapper {
 
     private final OrderLineRepository orderLineRepository;
-    private UserInfoService userInfoService;
-    private UserRepository userRepository;
+    private final UserInfoService userInfoService;
 
 
     public Order toOrder(final OrderForm orderForm) {
-        final String currentUser = userInfoService.getCurrentUser();
-        User byEmail = userRepository.findByEmail(currentUser);
-        List<OrderLine> byUsername = orderLineRepository.findByUsername(currentUser);
+        final User currentUser = userInfoService.getCurrentUser().get();;
+
 
         return Order.builder()
-                .username(currentUser)
-                .address(byEmail.getAddress())
+                .username(currentUser.getEmail())
+                .address(currentUser.getAddress())
                 .shipping_address(orderForm.getShippingAddress())
                 .status(OrderStatus.PLACED)
                 .build();

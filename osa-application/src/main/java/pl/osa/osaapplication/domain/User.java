@@ -11,6 +11,7 @@ import pl.osa.osaapplication.model.Role;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 
 @Data
@@ -22,6 +23,9 @@ public class User {
 
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long id;
+
     @Email
     @Column(name = "email")
     @NotNull(message = "This field is mandatory")
@@ -35,7 +39,7 @@ public class User {
     @Column(name = "city")
     private String city;
 
-    @NotNull
+
     @Column(name = "address")
     private String address;
 
@@ -57,6 +61,9 @@ public class User {
         return role;
     }
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    public Set<Address> addresses;
+
     @Override
     public String toString() {
         return "User{" +
@@ -66,19 +73,5 @@ public class User {
                 '}';
     }
 
-//    @Column(columnDefinition = "varchar(255) default 'USER'")
-//    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-//    @JoinTable(name = "users_to_roles",
-//            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "email"),
-//            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "name")
-//    )
-//    private List<Role> roles = new ArrayList<>();
 
-    //    @JoinColumn(name = "user_id",referencedColumnName = "id")
-//    @JoinColumn(name = "role_id",referencedColumnName = "name")
-//    private String role;
-
-    public boolean hasAddressDefined() {
-        return !this.getAddress().equals("default");
-    }
 }

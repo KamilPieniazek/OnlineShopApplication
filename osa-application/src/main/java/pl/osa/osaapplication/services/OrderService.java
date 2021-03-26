@@ -2,6 +2,7 @@ package pl.osa.osaapplication.services;
 
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import pl.osa.osaapplication.domain.Order;
 import pl.osa.osaapplication.domain.OrderLine;
@@ -14,7 +15,9 @@ import pl.osa.osaapplication.repositories.ProductRepository;
 import pl.osa.osaapplication.repositories.UserRepository;
 import pl.osa.osaapplication.services.users.UserInfoService;
 
+import javax.swing.text.html.Option;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -28,13 +31,13 @@ public class OrderService {
 
 
     public Order submitOrder() throws Exception {
-        String currentUser = userInfoService.getCurrentUser();
-        List<OrderLine> cartLines = orderLineRepository.findByUsernameAndOrderIsNull(currentUser);
-        User userInfo = userRepository.findByEmail(currentUser);
+        User currentUser = userInfoService.getCurrentUser().get();
+
+        List<OrderLine> cartLines = orderLineRepository.findByUsernameAndOrderIsNull(currentUser.getEmail());
         Order order = new Order();
-        order.setUsername(currentUser);
+        order.setUsername(currentUser.getEmail());
         order.setStatus(OrderStatus.PLACED);
-//        order.setShipping_address(userInfo.getAddress() + " " + userInfo.getCity());
+        order.setShipping_address(currentUser.getAddress() + " " + currentUser.getCity());
         order.setTotalPrice(CalculateTotalPrice(cartLines));
         orderRepository.save(order);
 

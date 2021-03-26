@@ -20,7 +20,7 @@ public class Oauth2UsersService {
         CustomOAuth2User customOAuth2User = new CustomOAuth2User(oAuth2User);
 
         String email = customOAuth2User.getName();
-        Optional<User> existingUser = userService.findById(email);
+        Optional<User> existingUser = userService.getByEmail(email);
 
         existingUser.ifPresentOrElse(
                 user -> userService.updateUserAfterOAuthLoginSuccess(user, getAuthenticationProvider(clientId)),

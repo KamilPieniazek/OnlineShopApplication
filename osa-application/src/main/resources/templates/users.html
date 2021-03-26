@@ -129,15 +129,10 @@
             }
         </style>
         <title>Kamil's Online Bookstore</title>
-
-
-
     </head>
 
 
 <body>
-
-
 <div th:insert="fragments::navbar"></div>
 <div id="logreg-forms" >
     <form class="form-signin" th:action="@{/users/sign-up}" th:object="${userForm}" method="post">
@@ -160,45 +155,6 @@
 
         <hr>
 
-<!--<div class="registerForm">-->
-<!--    <form th:action="@{/users/sign-up}" method="POST" th:object="${userForm}">-->
-<!--<h1>Sign up</h1>-->
-<!--        <fieldset>-->
-<!--            <label for="email">Email: </label>-->
-<!--            <input id="email" type="text" th:field="*{email}">-->
-<!--             <p th:if="${#fields.hasErrors('email')}"-->
-<!--                th:text="${#fields.errors('email')}"></p>-->
-
-
-<!--            <label for="password">Password: </label>-->
-<!--            <input id="password" type="text" th:field="*{password}" >-->
-<!--            <p th:if="${#fields.hasErrors('password')}"-->
-<!--               th:text="${#fields.errors('password')}"></p>-->
-
-<!--            <label for="city">City: </label>-->
-<!--            <input id="city" type="text" th:field="*{city}">-->
-<!--            <p th:if="${#fields.hasErrors('city')}"-->
-<!--               th:text="${#fields.errors('city')}"></p>-->
-
-<!--            <label for="address">Address: </label>-->
-<!--            <input id="address" type="text" th:field="*{address}">-->
-<!--            <p th:if="${#fields.hasErrors('address')}"-->
-<!--               th:text="${#fields.errors('address')}"></p>-->
-
-<!--            <label for="preferredCWayOfComunication">How can we contact you? :</label>-->
-<!--            <select id="preferredCWayOfComunication"  th:type="text"-->
-<!--                    th:field="*{preferredWayOfComunication}">-->
-<!--                <option value="">Pick</option>-->
-<!--                <option value="e-mail">E-mail</option>-->
-<!--                <option value="phone">Phone</option>-->
-<!--            </select>-->
-<!--            <p th:if="${#fields.hasErrors('preferredWayOfComunication')}"-->
-<!--               th:text="${#fields.errors('preferredWayOfComunication')}"></p>-->
-
-<!--            <button type="submit">Sign up</button>-->
-<!--        </fieldset>-->
-<!--    </form>-->
-<!--</div>-->
     </form>
 </div>
 </body>
